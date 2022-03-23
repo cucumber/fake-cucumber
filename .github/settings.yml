@@ -1,0 +1,5 @@
+_extends: .github
+
+repository:
+  name: fake-cucumber
+  description: Tool to generate test data for cucumber
