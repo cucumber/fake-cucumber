@@ -1,1 +1,3 @@
-../.templates/default.mk default.mk
+../../LICENSE LICENSE
+../../.templates/github/ .github/
+../../.templates/javascript/ .

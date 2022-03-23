@@ -1,89 +1,87 @@
-# Please update /.templates/default.mk and sync:
-#
-#     source scripts/functions.sh && rsync_files
-#
 SHELL := /usr/bin/env bash
-ALPINE = $(shell which apk 2> /dev/null)
-LIBNAME = $(shell basename $$(pwd))
-LANGUAGES ?= $(wildcard */)
-
 # https://stackoverflow.com/questions/2483182/recursive-wildcards-in-gnu-make
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
+TYPESCRIPT_SOURCE_FILES = $(sort $(call rwildcard,src test,*.ts *.tsx))
+PRIVATE = $(shell node -e "console.log(require('./package.json').private)")
+IS_TESTDATA = $(findstring -testdata,${CURDIR})
+NPM_MODULE = $(shell cat package.json | jq .name --raw-output)
 
-default: $(patsubst %,default-%,$(LANGUAGES))
+default: .tested
 .PHONY: default
 
-default-%: %
-	if [[ -d $< ]]; then cd $< && make default; fi
-.PHONY: default-%
+../../node_modules ../../package-lock.json: package.json
+	cd ../.. && npm install
 
-# Need to declare these phonies to avoid errors for packages without a particular language
-.PHONY: c dotnet go java javascript objective-c perl python ruby
+.codegen:
+	touch $@
 
-update-dependencies: $(patsubst %,update-dependencies-%,$(LANGUAGES))
+.tested: .tested-npm .built
+
+.built: $(TYPESCRIPT_SOURCE_FILES) ../../node_modules ../../package-lock.json .codegen
+	pushd ../.. && \
+	npm run build && \
+	popd && \
+	touch $@
+
+.tested-npm: $(TYPESCRIPT_SOURCE_FILES) ../../node_modules ../../package-lock.json .codegen
+	npm run test
+	touch $@
+
+pre-release: clean update-version update-dependencies default
+.PHONY: pre-release
+
+update-dependencies: ../../node_modules ../../package-lock.json
+	../../node_modules/.bin/npm-check-updates --upgrade --reject hast-util-sanitize,@types/node,react-markdown,rehype-raw,rehype-sanitize,remark-gfm
 .PHONY: update-dependencies
 
-update-dependencies-%: %
-	if [[ -d $< ]]; then cd $< && make update-dependencies; fi
-.PHONY: update-dependencies-%
-
-update-changelog:
+update-version:
+ifeq ($(IS_TESTDATA),-testdata)
+	# no-op
+else
 ifdef NEW_VERSION
-	cat CHANGELOG.md | ../scripts/update_changelog.sh $(NEW_VERSION) > CHANGELOG.md.tmp
-	mv CHANGELOG.md.tmp CHANGELOG.md
+	npm --no-git-tag-version --allow-same-version version "$(NEW_VERSION)"
+	# Update all npm packages that depend on us
+	pushd ../.. && \
+		./scripts/npm-each update_npm_dependency_if_exists package.json "$(NPM_MODULE)" "$(NEW_VERSION)"
 else
 	@echo -e "\033[0;31mNEW_VERSION is not defined. Can't update version :-(\033[0m"
 	exit 1
 endif
-.PHONY: update-changelog
+endif
+.PHONY: update-version
 
-pre-release: update-changelog $(patsubst %,pre-release-%,$(LANGUAGES))
-.PHONY: pre-release
-
-pre-release-%: %
-	if [[ -d $< ]]; then cd $< && make pre-release; fi
-.PHONY: pre-release-%
-
-release: publish
-.PHONY: release
-
-publish: create-and-push-release-tag $(patsubst %,publish-%,$(LANGUAGES))
+publish: .codegen
+ifeq ($(IS_TESTDATA),-testdata)
+	# no-op
+else
+ifneq (true,$(PRIVATE))
+	npm publish --access public
+else
+	@echo "Not publishing private npm module"
+endif
+endif
 .PHONY: publish
 
-publish-%: %
-	if [[ -d $< ]]; then cd $< && make publish; fi
-.PHONY: publish-%
-
-create-and-push-release-tag:
-	[ -f '/home/cukebot/configure' ] && /home/cukebot/configure
-	git commit --gpg-sign --all --message "Release $(LIBNAME) v$(NEW_VERSION)"
-	git tag --sign "$(LIBNAME)/v$(NEW_VERSION)" -m "Release $(LIBNAME) v$(NEW_VERSION)"
-	git push --tags
-.PHONY: create-and-push-release-tag
-
-post-release: $(patsubst %,post-release-%,$(LANGUAGES))
+post-release:
 .PHONY: post-release
 
-post-release: commit-and-push-post-release
-
-post-release-%: %
-	if [[ -d $< ]]; then cd $< && make post-release; fi
-.PHONY: post-release-%
-
-commit-and-push-post-release:
-ifdef NEW_VERSION
-	git push --tags
-	git commit --gpg-sign --all --message "Post release $(LIBNAME) v$(NEW_VERSION)" 2> /dev/null || true
-	git push
-else
-	@echo -e "\033[0;31mNEW_VERSION is not defined.\033[0m"
-	exit 1
-endif
-.PHONY: commit-and-push-post-release
-
-clean: $(patsubst %,clean-%,$(LANGUAGES))
+clean: clean-javascript
 .PHONY: clean
 
-clean-%: %
-	if [[ -d $< ]]; then cd $< && make clean; fi
-.PHONY: clean-%
+clean-javascript:
+	rm -rf .deps .codegen .tested* coverage dist acceptance
+.PHONY: clean-javascript
+
+clobber: clean
+	rm -rf node_modules ../../node_modules
+.PHONY: clobber
+
+### COMMON stuff for all platforms
+
+BERP_VERSION = 1.3.0
+BERP_GRAMMAR = gherkin.berp
+
+define berp-generate-parser =
+-! dotnet tool list --tool-path /usr/bin | grep "berp\s*$(BERP_VERSION)" && dotnet tool update Berp --version $(BERP_VERSION) --tool-path /usr/bin
+berp -g $(BERP_GRAMMAR) -t $< -o $@ --noBOM
+endef
