@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cucumber/cucumber.git"
+    "url": "git://github.com/cucumber/fake-cucumber.git"
   },
   "keywords": [
     "cucumber"
@@ -25,9 +25,9 @@
   "author": "Cucumber Limited <cukes@googlegroups.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cucumber/cucumber/issues"
+    "url": "https://github.com/cucumber/fake-cucumber/issues"
   },
-  "homepage": "https://github.com/cucumber/cucumber",
+  "homepage": "https://github.com/cucumber/fake-cucumber",
   "devDependencies": {
     "@types/glob": "7.2.0",
     "@types/mocha": "9.1.0",
