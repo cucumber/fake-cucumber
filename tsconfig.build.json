@@ -1,11 +1,17 @@
 {
-  "extends": "../../tsconfig.build.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "target": "es6",
+    "module": "commonjs",
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
+    "noEmit": false
   },
   "include": [
-    "package.json",
     "src",
     "test"
   ]

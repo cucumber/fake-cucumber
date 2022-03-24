@@ -1,3 +1,22 @@
 {
-  "extends": "../../tsconfig.json"
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es2018",
+    "lib": [
+      "es2019",
+    ],
+    "sourceMap": true,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "module": "esNext",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "noEmit": true
+  }
 }
