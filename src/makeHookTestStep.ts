@@ -1,8 +1,9 @@
-import * as messages from '@cucumber/messages'
 import { Query } from '@cucumber/gherkin-utils'
-import IClock from './IClock'
-import HookTestStep from './HookTestStep'
+import * as messages from '@cucumber/messages'
+
 import { MakeErrorMessage } from './ErrorMessageGenerator'
+import HookTestStep from './HookTestStep'
+import IClock from './IClock'
 import IStopwatch from './IStopwatch'
 import { IHook, ITestStep } from './types'
 

@@ -1,9 +1,10 @@
-import SupportCode from './SupportCode'
-import { AnyBody, HookOptions } from './types'
 import * as messages from '@cucumber/messages'
 import StackUtils from 'stack-utils'
-import IParameterTypeDefinition from './IParameterTypeDefinition'
 import { deprecate } from 'util'
+
+import IParameterTypeDefinition from './IParameterTypeDefinition'
+import SupportCode from './SupportCode'
+import { AnyBody, HookOptions } from './types'
 
 function setSupportCode(supportCode: SupportCode) {
   //@ts-ignore
@@ -12,10 +13,17 @@ function setSupportCode(supportCode: SupportCode) {
 
 function defineStepDefinition(expression: string | RegExp, body: AnyBody) {
   //@ts-ignore
-  global.supportCode.defineStepDefinition(getSourceReference(new Error().stack), expression, body)
+  global.supportCode.defineStepDefinition(
+    getSourceReference(new Error().stack),
+    expression,
+    body
+  )
 }
 
-function defineBeforeHook(tagExpressionOrBody: string | HookOptions | AnyBody, body?: AnyBody) {
+function defineBeforeHook(
+  tagExpressionOrBody: string | HookOptions | AnyBody,
+  body?: AnyBody
+) {
   //@ts-ignore
   global.supportCode.defineBeforeHook(
     getSourceReference(new Error().stack),
@@ -24,7 +32,10 @@ function defineBeforeHook(tagExpressionOrBody: string | HookOptions | AnyBody, b
   )
 }
 
-function defineAfterHook(tagExpressionOrBody: string | HookOptions | AnyBody, body?: AnyBody) {
+function defineAfterHook(
+  tagExpressionOrBody: string | HookOptions | AnyBody,
+  body?: AnyBody
+) {
   //@ts-ignore
   global.supportCode.defineAfterHook(
     getSourceReference(new Error().stack),
@@ -33,7 +44,9 @@ function defineAfterHook(tagExpressionOrBody: string | HookOptions | AnyBody, bo
   )
 }
 
-function defineParameterType0(parameterTypeDefinition: IParameterTypeDefinition) {
+function defineParameterType0(
+  parameterTypeDefinition: IParameterTypeDefinition
+) {
   //@ts-ignore
   global.supportCode.defineParameterType(parameterTypeDefinition)
 }
@@ -61,6 +74,18 @@ const Then = defineStepDefinition
 const Before = defineBeforeHook
 const After = defineAfterHook
 const ParameterType = defineParameterType0
-const defineParameterType = deprecate(defineParameterType0, 'Please use ParameterType instead')
+const defineParameterType = deprecate(
+  defineParameterType0,
+  'Please use ParameterType instead'
+)
 
-export { Given, When, Then, Before, After, ParameterType, defineParameterType, setSupportCode }
+export {
+  After,
+  Before,
+  defineParameterType,
+  Given,
+  ParameterType,
+  setSupportCode,
+  Then,
+  When,
+}

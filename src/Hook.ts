@@ -1,7 +1,8 @@
-import parseTagExpression from '@cucumber/tag-expressions'
 import * as messages from '@cucumber/messages'
+import parseTagExpression from '@cucumber/tag-expressions'
+
 import SupportCodeExecutor from './SupportCodeExecutor'
-import { IHook, AnyBody, ISupportCodeExecutor } from './types'
+import { AnyBody, IHook, ISupportCodeExecutor } from './types'
 
 export default class Hook implements IHook {
   constructor(
@@ -15,7 +16,9 @@ export default class Hook implements IHook {
   public match(pickle: messages.Pickle): ISupportCodeExecutor | null {
     const matches = this.tagExpression === null || this.matchesPickle(pickle)
 
-    return matches ? new SupportCodeExecutor(this.id, this.body, [], null, null) : null
+    return matches
+      ? new SupportCodeExecutor(this.id, this.body, [], null, null)
+      : null
   }
 
   public toMessage(): messages.Envelope {

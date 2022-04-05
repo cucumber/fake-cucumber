@@ -1,16 +1,20 @@
-import assert from 'assert'
+import {
+  CucumberExpression,
+  ParameterTypeRegistry,
+} from '@cucumber/cucumber-expressions'
+import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
-import makeTestCase from '../src/makeTestCase'
+import assert from 'assert'
+
+import { withSourceFramesOnlyStackTrace } from '../src/ErrorMessageGenerator'
 import ExpressionStepDefinition from '../src/ExpressionStepDefinition'
 import Hook from '../src/Hook'
-import { CucumberExpression, ParameterTypeRegistry } from '@cucumber/cucumber-expressions'
-import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
 import IncrementClock from '../src/IncrementClock'
-import { withSourceFramesOnlyStackTrace } from '../src/ErrorMessageGenerator'
-import { EnvelopeListener } from '../src/types'
-import makePickleTestStep from '../src/makePickleTestStep'
-import makeHookTestStep from '../src/makeHookTestStep'
 import IncrementStopwatch from '../src/IncrementStopwatch'
+import makeHookTestStep from '../src/makeHookTestStep'
+import makePickleTestStep from '../src/makePickleTestStep'
+import makeTestCase from '../src/makeTestCase'
+import { EnvelopeListener } from '../src/types'
 
 describe('makeTestCase', () => {
   it('transforms a Pickle to a TestCase', () => {
@@ -63,7 +67,8 @@ describe('makeTestCase', () => {
       )
 
       const messageList: messages.Envelope[] = []
-      const listener: EnvelopeListener = (message: messages.Envelope) => messageList.push(message)
+      const listener: EnvelopeListener = (message: messages.Envelope) =>
+        messageList.push(message)
       await testCase.execute(listener, 0, false, 'some-test-case-started-id')
       assert.strictEqual(messageList.length, 4)
     })

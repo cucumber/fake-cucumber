@@ -1,5 +1,6 @@
-import DataTable from '../src/DataTable'
 import assert from 'assert'
+
+import DataTable from '../src/DataTable'
 
 describe('DataTable', () => {
   it('can be transposed', () => {

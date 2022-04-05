@@ -1,7 +1,8 @@
 import { Argument, Group } from '@cucumber/cucumber-expressions'
 import * as messages from '@cucumber/messages'
-import { AnyBody, ISupportCodeExecutor, IWorld } from './types'
+
 import DataTable from './DataTable'
+import { AnyBody, ISupportCodeExecutor, IWorld } from './types'
 
 export default class SupportCodeExecutor implements ISupportCodeExecutor {
   constructor(
@@ -19,7 +20,11 @@ export default class SupportCodeExecutor implements ISupportCodeExecutor {
       argArray.push(this.docString.content)
     }
     if (this.dataTable) {
-      argArray.push(new DataTable(this.dataTable.rows.map((r) => r.cells.map((c) => c.value))))
+      argArray.push(
+        new DataTable(
+          this.dataTable.rows.map((r) => r.cells.map((c) => c.value))
+        )
+      )
     }
     return this.body.apply(thisObj, argArray)
   }

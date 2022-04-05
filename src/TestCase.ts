@@ -1,7 +1,8 @@
-import { EnvelopeListener, ITestCase, ITestStep, IWorld } from './types'
 import * as messages from '@cucumber/messages'
-import IClock from './IClock'
 import { getWorstTestStepResult } from '@cucumber/messages'
+
+import IClock from './IClock'
+import { EnvelopeListener, ITestCase, ITestStep, IWorld } from './types'
 
 const { millisecondsSinceEpochToTimestamp } = messages.TimeConversion
 
@@ -56,13 +57,15 @@ export default class TestCase implements ITestCase {
         listener,
         previousPassed
       )
-      previousPassed = testStepResult.status === messages.TestStepResultStatus.PASSED
+      previousPassed =
+        testStepResult.status === messages.TestStepResultStatus.PASSED
       testStepResults.push(testStepResult)
     }
 
     const willBeRetried =
       retryable &&
-      getWorstTestStepResult(testStepResults).status === messages.TestStepResultStatus.FAILED
+      getWorstTestStepResult(testStepResults).status ===
+        messages.TestStepResultStatus.FAILED
 
     listener({
       testCaseFinished: {

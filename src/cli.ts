@@ -1,19 +1,26 @@
+import createMeta from '@cucumber/create-meta'
+import {
+  GherkinStreams,
+  IGherkinStreamOptions,
+} from '@cucumber/gherkin-streams'
+import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
+import { MessageToNdjsonStream } from '@cucumber/message-streams'
+import * as messages from '@cucumber/messages'
 import { Command } from 'commander'
+
 import packageJson from '../package.json'
+import { version } from '../package.json'
 import loadSupportCode from './loadSupportCode'
 import runCucumber from './runCucumber'
-import { GherkinStreams, IGherkinStreamOptions } from '@cucumber/gherkin-streams'
-import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
-import { version } from '../package.json'
-import * as messages from '@cucumber/messages'
-import createMeta from '@cucumber/create-meta'
-import { MessageToNdjsonStream } from '@cucumber/message-streams'
 import { RunOptions } from './types'
 
 const program = new Command()
 program.version(packageJson.version)
 program.option('-r, --require <path>', 'override require path')
-program.option('--retry <count>', 'allow up to <count> retries for scenarios that fail')
+program.option(
+  '--retry <count>',
+  'allow up to <count> retries for scenarios that fail'
+)
 program.option('--predictable-ids', 'Use predictable ids', false)
 
 async function main() {
@@ -34,7 +41,10 @@ async function main() {
     newId: supportCode.newId,
     relativeTo: process.cwd(),
   }
-  const gherkinEnvelopeStream = GherkinStreams.fromPaths(paths, gherkinStreamOptions)
+  const gherkinEnvelopeStream = GherkinStreams.fromPaths(
+    paths,
+    gherkinStreamOptions
+  )
 
   const envelopeOutputStream = new MessageToNdjsonStream()
   envelopeOutputStream.pipe(process.stdout)

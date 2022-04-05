@@ -1,9 +1,10 @@
-import SupportCode from '../src/SupportCode'
 import { IdGenerator } from '@cucumber/messages'
-import IncrementClock from '../src/IncrementClock'
-import { withFullStackTrace } from '../src/ErrorMessageGenerator'
 import assert from 'assert'
+
+import { withFullStackTrace } from '../src/ErrorMessageGenerator'
+import IncrementClock from '../src/IncrementClock'
 import IncrementStopwatch from '../src/IncrementStopwatch'
+import SupportCode from '../src/SupportCode'
 
 describe('SupportCode', () => {
   it('allows no tags', () => {
