@@ -9,8 +9,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "lint": "eslint --ext ts --max-warnings 0 src test",
-    "lint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
+    "eslint": "eslint --ext ts --max-warnings 0 src test",
+    "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
     "build": "tsc --build tsconfig.build.json",
     "prepublishOnly": "npm run build"
