@@ -1,6 +1,9 @@
 import StackUtils from 'stack-utils'
 
-export type MakeErrorMessage = (error: Error, sourceFrames: readonly string[]) => string
+export type MakeErrorMessage = (
+  error: Error,
+  sourceFrames: readonly string[]
+) => string
 
 export function withFullStackTrace(): MakeErrorMessage {
   const stack = new StackUtils({

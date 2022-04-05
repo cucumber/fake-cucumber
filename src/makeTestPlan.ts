@@ -1,9 +1,10 @@
 import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
+
+import makeHookTestStep from './makeHookTestStep'
+import makePickleTestStep from './makePickleTestStep'
 import SupportCode from './SupportCode'
 import TestPlan from './TestPlan'
-import makePickleTestStep from './makePickleTestStep'
 import { ITestPlan, MakeTestCase, RunOptions } from './types'
-import makeHookTestStep from './makeHookTestStep'
 
 export default function makeTestPlan(
   gherkinQuery: GherkinQuery,

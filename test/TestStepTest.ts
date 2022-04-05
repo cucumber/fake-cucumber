@@ -1,21 +1,25 @@
-import assert from 'assert'
-import * as messages from '@cucumber/messages'
-import makePickleTestStep from '../src/makePickleTestStep'
-import TestWorld from './TestWorld'
-import IncrementClock from '../src/IncrementClock'
 import {
-  withSourceFramesOnlyStackTrace,
-  withFullStackTrace,
+  CucumberExpression,
+  ParameterTypeRegistry,
+} from '@cucumber/cucumber-expressions'
+import { Query } from '@cucumber/gherkin-utils'
+import * as messages from '@cucumber/messages'
+import { TimeConversion } from '@cucumber/messages'
+import assert from 'assert'
+
+import {
   IWorld,
   makeHookTestStep,
+  withFullStackTrace,
+  withSourceFramesOnlyStackTrace,
 } from '../src'
 import ExpressionStepDefinition from '../src/ExpressionStepDefinition'
-import { CucumberExpression, ParameterTypeRegistry } from '@cucumber/cucumber-expressions'
-import IncrementStopwatch from '../src/IncrementStopwatch'
-import { ITestStep } from '../src/types'
 import Hook from '../src/Hook'
-import { Query } from '@cucumber/gherkin-utils'
-import { TimeConversion } from '@cucumber/messages'
+import IncrementClock from '../src/IncrementClock'
+import IncrementStopwatch from '../src/IncrementStopwatch'
+import makePickleTestStep from '../src/makePickleTestStep'
+import { ITestStep } from '../src/types'
+import TestWorld from './TestWorld'
 
 describe('TestStep', () => {
   let world: IWorld
@@ -175,7 +179,10 @@ describe('TestStep', () => {
         true
       )
       assert.strictEqual(testStepResult.status, 'UNDEFINED')
-      assert.deepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.deepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status AMBIGUOUS when there are multiple matching step definitions', async () => {
@@ -186,7 +193,10 @@ describe('TestStep', () => {
         true
       )
       assert.strictEqual(testStepResult.status, 'AMBIGUOUS')
-      assert.deepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.deepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status PASSED when the sole step definitions passes', async () => {
@@ -197,7 +207,10 @@ describe('TestStep', () => {
         true
       )
       assert.strictEqual(testStepResult.status, 'PASSED')
-      assert.notDeepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.notDeepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status PENDING when the sole step definitions returns "pending"', async () => {
@@ -208,7 +221,10 @@ describe('TestStep', () => {
         true
       )
       assert.strictEqual(testStepResult.status, 'PENDING')
-      assert.notDeepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.notDeepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status SKIPPED when the sole step definitions returns "skipped"', async () => {
@@ -219,7 +235,10 @@ describe('TestStep', () => {
         true
       )
       assert.strictEqual(testStepResult.status, 'SKIPPED')
-      assert.notDeepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.notDeepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status FAILED when the sole step definitions throws an exception', async () => {
@@ -231,7 +250,10 @@ describe('TestStep', () => {
       )
       assert.strictEqual(testStepResult.status, 'FAILED')
       assert.ok(testStepResult.message.includes('at failed.feature:234'))
-      assert.notDeepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.notDeepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status SKIPPED when the previous step was not passed', async () => {
@@ -242,7 +264,10 @@ describe('TestStep', () => {
         false
       )
       assert.strictEqual(testStepResult.status, 'SKIPPED')
-      assert.deepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.deepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
 
     it('returns a TestStepResult with status FAILED when the previous aftr hook step was not passed', async () => {
@@ -253,7 +278,10 @@ describe('TestStep', () => {
         false
       )
       assert.strictEqual(testStepResult.status, 'FAILED')
-      assert.notDeepStrictEqual(testStepResult.duration, TimeConversion.millisecondsToDuration(0))
+      assert.notDeepStrictEqual(
+        testStepResult.duration,
+        TimeConversion.millisecondsToDuration(0)
+      )
     })
   })
 })

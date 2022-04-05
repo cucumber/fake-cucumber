@@ -9,11 +9,11 @@
   },
   "scripts": {
     "test": "mocha",
-    "lint": "eslint --ext ts --max-warnings 0 src test",
-    "lint-fix": "eslint --ext ts --max-warnings 0 --fix src test",
+    "eslint": "eslint --ext ts --max-warnings 0 src test",
+    "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
     "build": "tsc --build tsconfig.build.json",
-    "prepublishOnly": "tsc --build tsconfig.build.json"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,20 +33,29 @@
     "@types/mocha": "9.1.0",
     "@types/node": "16.11.26",
     "@types/stream-buffers": "3.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "mocha": "9.2.2",
+    "prettier": "^2.6.2",
     "source-map-support": "0.5.21",
     "stream-buffers": "3.0.2",
     "ts-node": "10.7.0",
-    "typescript": "4.6.2"
+    "typescript": "4.6.3"
   },
   "dependencies": {
-    "@cucumber/cucumber-expressions": "^15.0.0",
     "@cucumber/create-meta": "^6.0.2",
+    "@cucumber/cucumber-expressions": "^15.0.0",
     "@cucumber/gherkin": "^23.0.0",
     "@cucumber/gherkin-streams": "^5.0.1",
     "@cucumber/gherkin-utils": "^7.0.0",
-    "@cucumber/messages": "^18.0.0",
     "@cucumber/message-streams": "^4.0.1",
+    "@cucumber/messages": "^18.0.0",
     "@cucumber/tag-expressions": "^4.1.0",
     "@types/stack-utils": "2.0.1",
     "commander": "9.1.0",

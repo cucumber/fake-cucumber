@@ -1,5 +1,6 @@
-import TestStep from './TestStep'
 import * as messages from '@cucumber/messages'
+
+import TestStep from './TestStep'
 
 export default class PickleTestStep extends TestStep {
   public toMessage(): messages.TestStep {

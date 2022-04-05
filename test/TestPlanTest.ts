@@ -1,16 +1,17 @@
-import { gherkinMessages, streamToArray } from './TestHelpers'
-import * as messages from '@cucumber/messages'
-import { EnvelopeListener, RunOptions } from '../src/types'
-import assert from 'assert'
-import TestPlan from '../src/TestPlan'
 import { Query } from '@cucumber/gherkin-utils'
-import IncrementClock from '../src/IncrementClock'
+import * as messages from '@cucumber/messages'
+import assert from 'assert'
+
 import { withSourceFramesOnlyStackTrace } from '../src/ErrorMessageGenerator'
-import SupportCode from '../src/SupportCode'
-import makeTestCase from '../src/makeTestCase'
-import makePickleTestStep from '../src/makePickleTestStep'
-import makeHookTestStep from '../src/makeHookTestStep'
+import IncrementClock from '../src/IncrementClock'
 import IncrementStopwatch from '../src/IncrementStopwatch'
+import makeHookTestStep from '../src/makeHookTestStep'
+import makePickleTestStep from '../src/makePickleTestStep'
+import makeTestCase from '../src/makeTestCase'
+import SupportCode from '../src/SupportCode'
+import TestPlan from '../src/TestPlan'
+import { EnvelopeListener, RunOptions } from '../src/types'
+import { gherkinMessages, streamToArray } from './TestHelpers'
 
 const defaultRunOptions: RunOptions = { allowedRetries: 0 }
 
@@ -32,14 +33,21 @@ describe('TestPlan', () => {
   Scenario: test
     Given a passed step
 `
-    const testPlan = await makeTestPlan(gherkinSource, supportCode, defaultRunOptions)
+    const testPlan = await makeTestPlan(
+      gherkinSource,
+      supportCode,
+      defaultRunOptions
+    )
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope) => {
       if (!envelope) throw new Error('Envelope was null or undefined')
       envelopes.push(envelope)
     }
     await testPlan.execute(listener)
-    const testStepFinisheds = extractEnvelopes(envelopes, (e) => e.testStepFinished)
+    const testStepFinisheds = extractEnvelopes(
+      envelopes,
+      (e) => e.testStepFinished
+    )
     assert.deepStrictEqual(testStepFinisheds.length, 1)
     assert.strictEqual(testStepFinisheds[0].testStepResult.status, 'PASSED')
   })
@@ -57,7 +65,9 @@ describe('TestPlan', () => {
   Scenario: test
     Given a sometimes-failing step
 `
-    const testPlan = await makeTestPlan(gherkinSource, supportCode, { allowedRetries: 1 })
+    const testPlan = await makeTestPlan(gherkinSource, supportCode, {
+      allowedRetries: 1,
+    })
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope) => {
       if (!envelope) throw new Error('Envelope was null or undefined')
@@ -65,15 +75,24 @@ describe('TestPlan', () => {
     }
     await testPlan.execute(listener)
     extractEnvelopes(envelopes, (e) => e.testCaseStarted)
-    const testCaseStarteds = extractEnvelopes(envelopes, (e) => e.testCaseStarted)
+    const testCaseStarteds = extractEnvelopes(
+      envelopes,
+      (e) => e.testCaseStarted
+    )
     assert.deepStrictEqual(testCaseStarteds.length, 2)
     assert.strictEqual(testCaseStarteds[0].attempt, 0)
     assert.strictEqual(testCaseStarteds[1].attempt, 1)
-    const testCaseFinisheds = extractEnvelopes(envelopes, (e) => e.testCaseFinished)
+    const testCaseFinisheds = extractEnvelopes(
+      envelopes,
+      (e) => e.testCaseFinished
+    )
     assert.strictEqual(testCaseFinisheds.length, 2)
     assert.strictEqual(testCaseFinisheds[0].willBeRetried, true)
     assert.strictEqual(testCaseFinisheds[1].willBeRetried, false)
-    const testStepFinisheds = extractEnvelopes(envelopes, (e) => e.testStepFinished)
+    const testStepFinisheds = extractEnvelopes(
+      envelopes,
+      (e) => e.testStepFinished
+    )
     assert.deepStrictEqual(testStepFinisheds.length, 2)
     assert.strictEqual(testStepFinisheds[0].testStepResult.status, 'FAILED')
     assert.strictEqual(testStepFinisheds[1].testStepResult.status, 'PASSED')
@@ -86,14 +105,19 @@ describe('TestPlan', () => {
   Scenario: test
     Given a passed step
 `
-    const testPlan = await makeTestPlan(gherkinSource, supportCode, { allowedRetries: 1 })
+    const testPlan = await makeTestPlan(gherkinSource, supportCode, {
+      allowedRetries: 1,
+    })
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope) => {
       if (!envelope) throw new Error('Envelope was null or undefined')
       envelopes.push(envelope)
     }
     await testPlan.execute(listener)
-    const testStepFinisheds = extractEnvelopes(envelopes, (e) => e.testStepFinished)
+    const testStepFinisheds = extractEnvelopes(
+      envelopes,
+      (e) => e.testStepFinished
+    )
     assert.strictEqual(
       envelopes.find((e) => e.testCaseFinished).testCaseFinished.willBeRetried,
       false
@@ -107,14 +131,19 @@ describe('TestPlan', () => {
   Scenario: test
     Given a step we think exists
 `
-    const testPlan = await makeTestPlan(gherkinSource, supportCode, { allowedRetries: 1 })
+    const testPlan = await makeTestPlan(gherkinSource, supportCode, {
+      allowedRetries: 1,
+    })
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope) => {
       if (!envelope) throw new Error('Envelope was null or undefined')
       envelopes.push(envelope)
     }
     await testPlan.execute(listener)
-    const testStepFinisheds = extractEnvelopes(envelopes, (e) => e.testStepFinished)
+    const testStepFinisheds = extractEnvelopes(
+      envelopes,
+      (e) => e.testStepFinished
+    )
     assert.strictEqual(
       envelopes.find((e) => e.testCaseFinished).testCaseFinished.willBeRetried,
       false
@@ -136,22 +165,33 @@ describe('TestPlan', () => {
       },
     })
 
-    supportCode.defineStepDefinition(null, 'flight {flight}', (flight: Flight) =>
-      assert.strictEqual(flight.name, 'LHR-CDG')
+    supportCode.defineStepDefinition(
+      null,
+      'flight {flight}',
+      (flight: Flight) => assert.strictEqual(flight.name, 'LHR-CDG')
     )
 
     const gherkinSource = `Feature: test
   Scenario: test
     Given flight LHR-CDG
 `
-    const testPlan = await makeTestPlan(gherkinSource, supportCode, defaultRunOptions)
+    const testPlan = await makeTestPlan(
+      gherkinSource,
+      supportCode,
+      defaultRunOptions
+    )
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope) => envelopes.push(envelope)
     await testPlan.execute(listener)
-    const testStepFinisheds = extractEnvelopes(envelopes, (e) => e.testStepFinished)
+    const testStepFinisheds = extractEnvelopes(
+      envelopes,
+      (e) => e.testStepFinished
+    )
     assert.deepStrictEqual(testStepFinisheds.length, 1)
     assert.strictEqual(testStepFinisheds[0].testStepResult.status, 'PASSED')
-    const parameterTypes = envelopes.filter((m) => m.parameterType).map((m) => m.parameterType)
+    const parameterTypes = envelopes
+      .filter((m) => m.parameterType)
+      .map((m) => m.parameterType)
     assert.deepStrictEqual(parameterTypes.length, 1)
     assert.strictEqual(parameterTypes[0].name, 'flight')
   })
@@ -165,12 +205,18 @@ describe('TestPlan', () => {
   Scenario: test
     Given a passed step
 `
-    const testPlan = await makeTestPlan(gherkinSource, supportCode, defaultRunOptions)
+    const testPlan = await makeTestPlan(
+      gherkinSource,
+      supportCode,
+      defaultRunOptions
+    )
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope) => envelopes.push(envelope)
     await testPlan.execute(listener)
 
-    const attachments = envelopes.filter((m) => m.attachment).map((m) => m.attachment)
+    const attachments = envelopes
+      .filter((m) => m.attachment)
+      .map((m) => m.attachment)
     assert.deepStrictEqual(attachments.length, 1)
     assert.strictEqual(attachments[0].body, 'hello world')
   })
@@ -181,7 +227,9 @@ async function makeTestPlan(
   supportCode: SupportCode,
   runOptions: RunOptions
 ): Promise<TestPlan> {
-  const gherkinEnvelopes = await streamToArray(gherkinMessages(gherkinSource, 'test.feature'))
+  const gherkinEnvelopes = await streamToArray(
+    gherkinMessages(gherkinSource, 'test.feature')
+  )
   const gherkinQuery = new Query()
   for (const gherkinEnvelope of gherkinEnvelopes) {
     gherkinQuery.update(gherkinEnvelope)

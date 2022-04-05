@@ -1,6 +1,11 @@
-import SupportCodeExecutor from './SupportCodeExecutor'
-import { CucumberExpression, Expression, RegularExpression } from '@cucumber/cucumber-expressions'
+import {
+  CucumberExpression,
+  Expression,
+  RegularExpression,
+} from '@cucumber/cucumber-expressions'
 import * as messages from '@cucumber/messages'
+
+import SupportCodeExecutor from './SupportCodeExecutor'
 import { AnyBody, IStepDefinition, ISupportCodeExecutor } from './types'
 
 export default class ExpressionStepDefinition implements IStepDefinition {
@@ -43,7 +48,9 @@ export default class ExpressionStepDefinition implements IStepDefinition {
     } else if (this.expression instanceof RegularExpression) {
       return messages.StepDefinitionPatternType.REGULAR_EXPRESSION
     } else {
-      throw new Error(`Unknown expression type: ${this.expression.constructor.name}`)
+      throw new Error(
+        `Unknown expression type: ${this.expression.constructor.name}`
+      )
     }
   }
 }

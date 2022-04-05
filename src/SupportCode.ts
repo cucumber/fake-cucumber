@@ -4,15 +4,16 @@ import {
   ParameterTypeRegistry,
 } from '@cucumber/cucumber-expressions'
 import * as messages from '@cucumber/messages'
-import { IHook, AnyBody, IStepDefinition, HookOptions } from './types'
+
+import DateClock from './DateClock'
+import { MakeErrorMessage, withFullStackTrace } from './ErrorMessageGenerator'
 import ExpressionStepDefinition from './ExpressionStepDefinition'
 import Hook from './Hook'
 import IClock from './IClock'
-import { MakeErrorMessage, withFullStackTrace } from './ErrorMessageGenerator'
 import IParameterTypeDefinition from './IParameterTypeDefinition'
-import PerfHooksStopwatch from './PerfHooksStopwatch'
 import IStopwatch from './IStopwatch'
-import DateClock from './DateClock'
+import PerfHooksStopwatch from './PerfHooksStopwatch'
+import { AnyBody, HookOptions, IHook, IStepDefinition } from './types'
 
 function defaultTransformer(...args: string[]) {
   return args
@@ -29,7 +30,9 @@ export default class SupportCode {
   public readonly afterHooks: IHook[] = []
 
   private readonly parameterTypeRegistry = new ParameterTypeRegistry()
-  private readonly expressionFactory = new ExpressionFactory(this.parameterTypeRegistry)
+  private readonly expressionFactory = new ExpressionFactory(
+    this.parameterTypeRegistry
+  )
   public readonly undefinedParameterTypeMessages: messages.Envelope[] = []
 
   constructor(
@@ -39,7 +42,9 @@ export default class SupportCode {
     public readonly makeErrorMessage: MakeErrorMessage = withFullStackTrace()
   ) {}
 
-  public defineParameterType(parameterTypeDefinition: IParameterTypeDefinition) {
+  public defineParameterType(
+    parameterTypeDefinition: IParameterTypeDefinition
+  ) {
     const parameterType = new ParameterType<any>(
       parameterTypeDefinition.name,
       parameterTypeDefinition.regexp,
@@ -68,7 +73,12 @@ export default class SupportCode {
   ): void {
     try {
       const expr = this.expressionFactory.createExpression(expression)
-      const stepDefinition = new ExpressionStepDefinition(this.newId(), expr, sourceReference, body)
+      const stepDefinition = new ExpressionStepDefinition(
+        this.newId(),
+        expr,
+        sourceReference,
+        body
+      )
       this.registerStepDefinition(stepDefinition)
     } catch (e) {
       if (e.undefinedParameterTypeName) {
@@ -93,7 +103,9 @@ export default class SupportCode {
     tagExpressionOptionsOrBody: string | HookOptions | AnyBody,
     body?: AnyBody
   ) {
-    this.registerBeforeHook(this.makeHook(sourceReference, tagExpressionOptionsOrBody, body))
+    this.registerBeforeHook(
+      this.makeHook(sourceReference, tagExpressionOptionsOrBody, body)
+    )
   }
 
   public registerBeforeHook(hook: IHook) {
@@ -105,7 +117,9 @@ export default class SupportCode {
     tagExpressionOptionsOrBody: string | HookOptions | AnyBody,
     body?: AnyBody
   ) {
-    this.registerAfterHook(this.makeHook(sourceReference, tagExpressionOptionsOrBody, body))
+    this.registerAfterHook(
+      this.makeHook(sourceReference, tagExpressionOptionsOrBody, body)
+    )
   }
 
   public registerAfterHook(hook: IHook) {
@@ -118,14 +132,19 @@ export default class SupportCode {
     body?: AnyBody
   ) {
     const name =
-      typeof tagExpressionOptionsOrBody === 'object' ? tagExpressionOptionsOrBody.name : undefined
+      typeof tagExpressionOptionsOrBody === 'object'
+        ? tagExpressionOptionsOrBody.name
+        : undefined
     let tagExpression = null
     if (typeof tagExpressionOptionsOrBody === 'string') {
       tagExpression = tagExpressionOptionsOrBody
     } else if (typeof tagExpressionOptionsOrBody === 'object') {
       tagExpression = tagExpressionOptionsOrBody.tagExpression ?? null
     }
-    body = typeof tagExpressionOptionsOrBody === 'function' ? tagExpressionOptionsOrBody : body
+    body =
+      typeof tagExpressionOptionsOrBody === 'function'
+        ? tagExpressionOptionsOrBody
+        : body
     return new Hook(this.newId(), tagExpression, sourceReference, body, name)
   }
 }

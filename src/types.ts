@@ -1,8 +1,9 @@
-import { Readable } from 'stream'
+import { Query as GherkinQuery, Query } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
-import IClock from './IClock'
+import { Readable } from 'stream'
+
 import { MakeErrorMessage } from './ErrorMessageGenerator'
-import { Query, Query as GherkinQuery } from '@cucumber/gherkin-utils'
+import IClock from './IClock'
 import IStopwatch from './IStopwatch'
 
 export interface RunOptions {
@@ -72,7 +73,10 @@ export interface HookOptions {
   tagExpression?: string
 }
 export type AnyBody = (...args: readonly unknown[]) => unknown
-export type Attach = (data: string | Buffer | Readable, mediaType: string) => void | Promise<void>
+export type Attach = (
+  data: string | Buffer | Readable,
+  mediaType: string
+) => void | Promise<void>
 export type Log = (text: string) => void | Promise<void>
 
 export type MakePickleTestStep = (

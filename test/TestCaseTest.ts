@@ -1,14 +1,18 @@
+import {
+  CucumberExpression,
+  ParameterTypeRegistry,
+} from '@cucumber/cucumber-expressions'
 import * as messages from '@cucumber/messages'
 import assert from 'assert'
+
 import {
-  ITestStep,
-  withSourceFramesOnlyStackTrace,
   IncrementClock,
-  makePickleTestStep,
   IncrementStopwatch,
+  ITestStep,
+  makePickleTestStep,
+  withSourceFramesOnlyStackTrace,
 } from '../src'
 import ExpressionStepDefinition from '../src/ExpressionStepDefinition'
-import { CucumberExpression, ParameterTypeRegistry } from '@cucumber/cucumber-expressions'
 import TestCase from '../src/TestCase'
 
 describe('TestCase', () => {
@@ -17,7 +21,10 @@ describe('TestCase', () => {
     beforeEach(() => {
       const stepDefinition = new ExpressionStepDefinition(
         'an-id',
-        new CucumberExpression('an ambiguous step', new ParameterTypeRegistry()),
+        new CucumberExpression(
+          'an ambiguous step',
+          new ParameterTypeRegistry()
+        ),
         null,
         () => {
           throw new Error('Should now be run')
@@ -56,7 +63,9 @@ describe('TestCase', () => {
       )
 
       const testCaseStarted = emitted[0].testCaseStarted
-      const testCaseFinished = emitted.find((m) => m.testCaseFinished).testCaseFinished
+      const testCaseFinished = emitted.find(
+        (m) => m.testCaseFinished
+      ).testCaseFinished
 
       assert.strictEqual(testCaseStarted.testCaseId, testCase.id)
       assert.strictEqual(testCaseFinished.testCaseStartedId, testCaseStarted.id)
@@ -78,7 +87,9 @@ describe('TestCase', () => {
         'test-case-started-id'
       )
 
-      const testCaseFinished = emitted.find((m) => m.testCaseFinished).testCaseFinished
+      const testCaseFinished = emitted.find(
+        (m) => m.testCaseFinished
+      ).testCaseFinished
 
       assert.strictEqual(testCaseFinished.willBeRetried, true)
     })

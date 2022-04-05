@@ -1,6 +1,7 @@
-import { EnvelopeListener, ITestCase, ITestPlan, RunOptions } from './types'
 import * as messages from '@cucumber/messages'
+
 import SupportCode from './SupportCode'
+import { EnvelopeListener, ITestCase, ITestPlan, RunOptions } from './types'
 
 export default class TestPlan implements ITestPlan {
   constructor(
@@ -16,7 +17,8 @@ export default class TestPlan implements ITestPlan {
     for (const stepDefinition of this.supportCode.stepDefinitions) {
       listener(stepDefinition.toMessage())
     }
-    for (const undefinedParameterType of this.supportCode.undefinedParameterTypeMessages) {
+    for (const undefinedParameterType of this.supportCode
+      .undefinedParameterTypeMessages) {
       listener(undefinedParameterType)
     }
     for (const hook of this.supportCode.beforeHooks) {
