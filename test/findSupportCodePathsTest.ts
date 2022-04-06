@@ -1,4 +1,5 @@
 import assert from 'assert'
+import path from 'path'
 
 import findSupportCodePaths from '../src/findSupportCodePaths'
 
@@ -10,17 +11,17 @@ describe('#findSupportCodePaths', () => {
     ]
     const supportCodePaths = await findSupportCodePaths(paths)
     assert.deepStrictEqual(supportCodePaths, [
-      __dirname + '/support/nested/js.js',
-      __dirname + '/support/nested/ts.ts',
+      path.resolve(__dirname, 'support/nested/js.js'),
+      path.resolve(__dirname, 'support/nested/ts.ts'),
     ])
   })
 
-  it("finds files underneath feature file's patrent directories using relative paths", async () => {
+  it("finds files underneath feature file's parent directories using relative paths", async () => {
     const paths = ['test/support/test.feature']
     const supportCodePaths = await findSupportCodePaths(paths)
     assert.deepStrictEqual(supportCodePaths, [
-      __dirname + '/support/nested/js.js',
-      __dirname + '/support/nested/ts.ts',
+      path.resolve(__dirname, 'support/nested/js.js'),
+      path.resolve(__dirname, 'support/nested/ts.ts'),
     ])
   })
 
@@ -28,7 +29,7 @@ describe('#findSupportCodePaths', () => {
     const paths = ['test/support/nested/js.js']
     const supportCodePaths = await findSupportCodePaths(paths)
     assert.deepStrictEqual(supportCodePaths, [
-      __dirname + '/support/nested/js.js',
+      path.resolve(__dirname, 'support/nested/js.js'),
     ])
   })
 })
