@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+* Build `fake-cucumber` as a standalone, thus making all dependencies development ones ([PR#8](https://github.com/cucumber/fake-cucumber/pull/8))
+
 ### Deprecated
 
 ### Removed
