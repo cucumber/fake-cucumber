@@ -11,7 +11,7 @@
     "eslint": "eslint --ext ts --max-warnings 0 src test",
     "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
-    "build": "esbuild ./src/cli.ts --bundle --platform=node --outfile=./dist/fake-cucumber.js",
+    "build": "esbuild ./src/cli.ts --bundle --platform=node --external:ts-node --external:typescript --outfile=./dist/fake-cucumber.js",
     "prepublishOnly": "npm run build"
   },
   "repository": {
