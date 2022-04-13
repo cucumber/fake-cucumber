@@ -3,6 +3,7 @@
   "version": "15.0.0",
   "description": "Fake Cucumber generates fake results",
   "main": "dist/fake-cucumber.js",
+  "types": "dist/src/index.d.ts",
   "bin": {
     "fake-cucumber": "bin/fake-cucumber"
   },
@@ -11,7 +12,9 @@
     "eslint": "eslint --ext ts --max-warnings 0 src test",
     "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
-    "build": "esbuild ./src/cli.ts --bundle --platform=node --external:ts-node --external:typescript --outfile=./dist/fake-cucumber.js",
+    "build:package": "esbuild ./src/cli.ts --bundle --platform=node --external:ts-node --external:typescript --outfile=./dist/fake-cucumber.js",
+    "build:types": "tsc --build tsconfig.build.json",
+    "build": "npm run build:types && npm run build:package",
     "prepublishOnly": "npm run build"
   },
   "repository": {
