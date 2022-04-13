@@ -2,7 +2,7 @@
   "name": "@cucumber/fake-cucumber",
   "version": "15.0.0",
   "description": "Fake Cucumber generates fake results",
-  "main": "dist/src/index.js",
+  "main": "dist/fake-cucumber.js",
   "types": "dist/src/index.d.ts",
   "bin": {
     "fake-cucumber": "bin/fake-cucumber"
@@ -12,7 +12,9 @@
     "eslint": "eslint --ext ts --max-warnings 0 src test",
     "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
-    "build": "tsc --build tsconfig.build.json",
+    "build:package": "esbuild ./src/cli.ts --bundle --platform=node --external:ts-node --external:typescript --outfile=./dist/fake-cucumber.js",
+    "build:types": "tsc --build tsconfig.build.json",
+    "build": "npm run build:types && npm run build:package",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -29,26 +31,6 @@
   },
   "homepage": "https://github.com/cucumber/fake-cucumber",
   "devDependencies": {
-    "@types/glob": "7.2.0",
-    "@types/mocha": "9.1.0",
-    "@types/node": "16.11.26",
-    "@types/stream-buffers": "3.0.4",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "eslint": "^8.12.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "mocha": "9.2.2",
-    "prettier": "^2.6.2",
-    "source-map-support": "0.5.21",
-    "stream-buffers": "3.0.2",
-    "ts-node": "10.7.0",
-    "typescript": "4.6.3"
-  },
-  "dependencies": {
     "@cucumber/create-meta": "^6.0.2",
     "@cucumber/cucumber-expressions": "^15.0.0",
     "@cucumber/gherkin": "^23.0.0",
@@ -57,10 +39,29 @@
     "@cucumber/message-streams": "^4.0.1",
     "@cucumber/messages": "^18.0.0",
     "@cucumber/tag-expressions": "^4.1.0",
+    "@types/glob": "7.2.0",
+    "@types/mocha": "9.1.0",
+    "@types/node": "16.11.26",
     "@types/stack-utils": "2.0.1",
+    "@types/stream-buffers": "3.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
     "commander": "9.1.0",
+    "esbuild": "^0.14.36",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "glob": "7.2.0",
-    "stack-utils": "2.0.5"
+    "mocha": "9.2.2",
+    "prettier": "^2.6.2",
+    "source-map-support": "0.5.21",
+    "stack-utils": "2.0.5",
+    "stream-buffers": "3.0.2",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.3"
   },
   "directories": {
     "test": "test"

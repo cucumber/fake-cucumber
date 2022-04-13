@@ -17,6 +17,5 @@
     "target": "ES6",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "noEmit": true,
   }
 }

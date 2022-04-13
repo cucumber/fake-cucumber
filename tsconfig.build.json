@@ -9,11 +9,10 @@
     "module": "commonjs",
     "rootDir": ".",
     "outDir": "dist",
-    "noEmit": false
+    "emitDeclarationOnly": true
   },
   "include": [
     "src",
-    "test",
     "package.json"
   ]
 }
