@@ -12,7 +12,7 @@ describe('fake-cucumber CLI', () => {
 
     it(`can process ${featureName}.feature without error`, async () => {
       try {
-        await run(`./scripts/fake-cucumber.sh features/${featureName}.feature`)
+        await run(`node dist/src/cli.js features/${featureName}.feature`)
       } catch (error) {
         assert.ifError(error)
       }
@@ -20,7 +20,7 @@ describe('fake-cucumber CLI', () => {
 
     it(`renders ${featureName}.feature execution report to stdout`, async () => {
       const { stdout } = await run(
-        `./scripts/fake-cucumber.sh features/${featureName}.feature`
+        `node dist/src/cli.js features/${featureName}.feature`
       )
 
       assert.ok(stdout)
