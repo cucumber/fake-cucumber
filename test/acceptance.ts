@@ -1,4 +1,4 @@
-import assert from 'assert/strict'
+import { strict as assert } from 'assert'
 import { exec } from 'child_process'
 import glob from 'glob'
 import path from 'path'
