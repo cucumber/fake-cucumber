@@ -39,6 +39,4 @@ jobs:
 
       - run: npm install-ci-test
 
-      - run: npm run validate
-
       - run: npm run eslint

@@ -8,8 +8,9 @@
     "fake-cucumber": "bin/fake-cucumber"
   },
   "scripts": {
-    "test": "mocha --exclude test/acceptance.ts",
-    "validate": "npm run build && mocha test/acceptance.ts",
+    "test": "npm run test:unit && npm run test:acceptance",
+    "test:unit": "mocha --exclude test/acceptance.ts",
+    "test:acceptance": "npm run build && mocha test/acceptance.ts",
     "eslint": "eslint --ext ts --max-warnings 0 src test",
     "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
