@@ -31,6 +31,11 @@
   },
   "homepage": "https://github.com/cucumber/fake-cucumber",
   "devDependencies": {
+    "@cucumber/gherkin": "^23.0.0",
+    "@cucumber/gherkin-streams": "^5.0.1",
+    "@cucumber/gherkin-utils": "^7.0.0",
+    "@cucumber/message-streams": "^4.0.1",
+    "@cucumber/messages": "^18.0.0",
     "@types/glob": "7.2.0",
     "@types/mocha": "9.1.0",
     "@types/node": "16.11.27",
@@ -53,16 +58,18 @@
   "dependencies": {
     "@cucumber/create-meta": "^6.0.2",
     "@cucumber/cucumber-expressions": "^15.0.0",
-    "@cucumber/gherkin": "^23.0.0",
-    "@cucumber/gherkin-streams": "^5.0.1",
-    "@cucumber/gherkin-utils": "^7.0.0",
-    "@cucumber/message-streams": "^4.0.1",
-    "@cucumber/messages": "^18.0.0",
     "@cucumber/tag-expressions": "^4.1.0",
     "@types/stack-utils": "2.0.1",
     "commander": "9.2.0",
     "glob": "8.0.1",
     "stack-utils": "2.0.5"
+  },
+  "peerDependencies": {
+    "@cucumber/gherkin": ">=23.0",
+    "@cucumber/gherkin-streams": ">=5.0.1",
+    "@cucumber/gherkin-utils": ">=7.0.0",
+    "@cucumber/message-streams": ">=4.0.1",
+    "@cucumber/messages": ">=18.0"
   },
   "directories": {
     "test": "test"
