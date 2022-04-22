@@ -5,10 +5,7 @@ import findSupportCodePaths from '../src/findSupportCodePaths'
 
 describe('#findSupportCodePaths', () => {
   it('finds files underneath feature directories', async () => {
-    const paths = [
-      __dirname + '/support/test.feature',
-      __dirname + '/support/nested',
-    ]
+    const paths = ['test/support/test.feature', 'test/support/nested']
     const supportCodePaths = await findSupportCodePaths(paths)
     assert.deepStrictEqual(supportCodePaths, [
       path.resolve(__dirname, 'support/nested/js.js'),

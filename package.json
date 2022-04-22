@@ -8,7 +8,9 @@
     "fake-cucumber": "bin/fake-cucumber"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "npm run test:unit && npm run test:acceptance",
+    "test:unit": "mocha --exclude test/acceptance.ts",
+    "test:acceptance": "npm run build && mocha test/acceptance.ts",
     "eslint": "eslint --ext ts --max-warnings 0 src test",
     "eslint:fix": "eslint --ext ts --max-warnings 0 --fix src test",
     "coverage": "nyc --reporter=html --reporter=text mocha",
@@ -59,7 +61,7 @@
     "@cucumber/tag-expressions": "^4.1.0",
     "@types/stack-utils": "2.0.1",
     "commander": "9.2.0",
-    "glob": "7.2.0",
+    "glob": "8.0.1",
     "stack-utils": "2.0.5"
   },
   "peerDependencies": {
