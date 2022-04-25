@@ -1,4 +1,4 @@
-import createMeta from '@cucumber/create-meta'
+import detectCiEnvironment from '@cucumber/ci-environment'
 import {
   GherkinStreams,
   IGherkinStreamOptions,
@@ -7,6 +7,7 @@ import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
 import { MessageToNdjsonStream } from '@cucumber/message-streams'
 import * as messages from '@cucumber/messages'
 import { Command } from 'commander'
+import os from 'os'
 
 import packageJson from '../package.json'
 import { version } from '../package.json'
@@ -50,7 +51,25 @@ async function main() {
   envelopeOutputStream.pipe(process.stdout)
 
   const metaEnvelope: messages.Envelope = {
-    meta: createMeta('fake-cucumber', version, process.env),
+    meta: {
+      protocolVersion: messages.version,
+      implementation: {
+        version,
+        name: 'fake-cucumber',
+      },
+      cpu: {
+        name: os.arch(),
+      },
+      os: {
+        name: os.platform(),
+        version: os.release(),
+      },
+      runtime: {
+        name: 'node.js',
+        version: process.versions.node,
+      },
+      ci: detectCiEnvironment(process.env),
+    },
   }
   envelopeOutputStream.write(metaEnvelope)
 
