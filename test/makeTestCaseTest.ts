@@ -143,12 +143,14 @@ describe('makeTestCase', () => {
       steps: [
         {
           id: 'step-1',
+          type: messages.PickleStepType.UNKNOWN,
           text: 'a passed step',
           astNodeIds: [],
         },
         {
           id: 'step-2',
           text: 'a failed step',
+          type: messages.PickleStepType.OUTCOME,
           astNodeIds: [],
         },
       ],
