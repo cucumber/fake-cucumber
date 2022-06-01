@@ -67,6 +67,7 @@ describe('TestStep', () => {
       'some-test-step-id',
       {
         text: 'an undefined step',
+        type: messages.PickleStepType.UNKNOWN,
         astNodeIds: [],
         id: '1',
       },
@@ -81,6 +82,7 @@ describe('TestStep', () => {
       'some-test-step-id',
       {
         text: 'a failed step',
+        type: messages.PickleStepType.OUTCOME,
         astNodeIds: [],
         id: '1',
       },
@@ -95,6 +97,7 @@ describe('TestStep', () => {
       'some-test-step-id',
       {
         text: 'a failed step',
+        type: messages.PickleStepType.ACTION,
         astNodeIds: [],
         id: '1',
       },
@@ -109,6 +112,7 @@ describe('TestStep', () => {
       'some-test-step-id',
       {
         text: 'a passed step',
+        type: messages.PickleStepType.CONTEXT,
         astNodeIds: [],
         id: '1',
       },
@@ -123,6 +127,7 @@ describe('TestStep', () => {
       'some-test-step-id',
       {
         text: 'a pending step',
+        type: messages.PickleStepType.UNKNOWN,
         astNodeIds: [],
         id: '1',
       },
@@ -137,6 +142,7 @@ describe('TestStep', () => {
       'some-test-step-id',
       {
         text: 'a skipped step',
+        type: messages.PickleStepType.UNKNOWN,
         astNodeIds: [],
         id: '1',
       },
