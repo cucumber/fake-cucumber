@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 * Replace former `@cucumber/create-meta` with newer `@cucumber/ci-environment`
+* Update cucumber dependencies to bring support for retaining step keywords (refs. https://github.com/cucumber/common/pull/1741)
 
 ### Deprecated
 
