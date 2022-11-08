@@ -62,7 +62,7 @@
     "@types/stack-utils": "2.0.1",
     "commander": "9.4.1",
     "glob": "8.0.3",
-    "stack-utils": "2.0.5"
+    "stack-utils": "2.0.6"
   },
   "peerDependencies": {
     "@cucumber/gherkin": ">=24.0",
