@@ -260,6 +260,10 @@ describe('TestStep', () => {
         testStepResult.duration,
         TimeConversion.millisecondsToDuration(0)
       )
+      assert.deepStrictEqual(testStepResult.exception, {
+        type: 'Error',
+        message: 'Should now be run',
+      })
     })
 
     it('returns a TestStepResult with status SKIPPED when the previous step was not passed', async () => {
@@ -288,6 +292,9 @@ describe('TestStep', () => {
         testStepResult.duration,
         TimeConversion.millisecondsToDuration(0)
       )
+      assert.deepStrictEqual(testStepResult.exception, {
+        type: 'Error',
+      })
     })
   })
 })

@@ -10,6 +10,7 @@ import {
   ITestStep,
   IWorld,
 } from './types'
+import { Exception } from '@cucumber/messages'
 
 const { millisecondsToDuration, millisecondsSinceEpochToTimestamp } =
   messages.TimeConversion
@@ -70,6 +71,19 @@ export default abstract class TestStep implements ITestStep {
     }
 
     const start = this.stopwatch.stopwatchNow()
+
+    function makeException(error: Error): Exception {
+      if (error.message) {
+        return {
+          type: error.name,
+          message: error.message,
+        }
+      }
+      return {
+        type: error.name,
+      }
+    }
+
     try {
       world.attach = makeAttach(this.id, testCaseStartedId, listener)
       world.log = (text: string) => {
@@ -99,6 +113,7 @@ export default abstract class TestStep implements ITestStep {
           duration,
           status: messages.TestStepResultStatus.FAILED,
           message,
+          exception: makeException(error),
         },
         listener
       )
