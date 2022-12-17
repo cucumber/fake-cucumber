@@ -227,5 +227,3 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 [1.1.0]: https://github.com/cucumber/fake-cucumber/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/cucumber/fake-cucumber/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/cucumber/fake-cucumber/releases/tag/v1.0.0
-avidjgoss]:        https://github.com/davidjgoss
-[vincent-psarga]:    https://github.com/vincent-psarga
