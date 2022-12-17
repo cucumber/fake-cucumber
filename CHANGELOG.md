@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [16.1.0] - 2022-12-17
 ### Added
 - Exception to step result ([#78](https://github.com/cucumber/fake-cucumber/pull/78))
 - Upgrade to `@cucumber/messages` `21`
@@ -194,7 +196,8 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 ### Added
 - First release
 
-[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.0.0...main
+[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...main
+[16.1.0]: https://github.com/cucumber/fake-cucumber/compare/v16.0.0...main
 [16.0.0]: https://github.com/cucumber/fake-cucumber/compare/v15.0.0...main
 [15.0.0]: https://github.com/cucumber/fake-cucumber/compare/v14.0.0...v15.0.0
 [14.0.0]: https://github.com/cucumber/fake-cucumber/compare/v13.0.0...v14.0.0
@@ -224,8 +227,5 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 [1.1.0]: https://github.com/cucumber/fake-cucumber/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/cucumber/fake-cucumber/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/cucumber/fake-cucumber/releases/tag/v1.0.0
-
-<!-- Contributors in alphabetical order -->
-[aslakhellesoy]:     https://github.com/aslakhellesoy
-[davidjgoss]:        https://github.com/davidjgoss
+avidjgoss]:        https://github.com/davidjgoss
 [vincent-psarga]:    https://github.com/vincent-psarga
