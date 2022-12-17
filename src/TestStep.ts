@@ -1,4 +1,5 @@
 import * as messages from '@cucumber/messages'
+import { Exception } from '@cucumber/messages'
 
 import { MakeErrorMessage } from './ErrorMessageGenerator'
 import IClock from './IClock'
@@ -10,7 +11,6 @@ import {
   ITestStep,
   IWorld,
 } from './types'
-import { Exception } from '@cucumber/messages'
 
 const { millisecondsToDuration, millisecondsSinceEpochToTimestamp } =
   messages.TimeConversion
