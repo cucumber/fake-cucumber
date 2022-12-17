@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-## Added
+### Added
 - Exception to step result ([#78](https://github.com/cucumber/fake-cucumber/pull/78))
 - Upgrade to `@cucumber/messages` `21`
 - Upgrade to `@cucumber/gherkin` `26`
