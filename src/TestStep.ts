@@ -1,4 +1,5 @@
 import * as messages from '@cucumber/messages'
+import { Exception } from '@cucumber/messages'
 
 import { MakeErrorMessage } from './ErrorMessageGenerator'
 import IClock from './IClock'
@@ -70,6 +71,19 @@ export default abstract class TestStep implements ITestStep {
     }
 
     const start = this.stopwatch.stopwatchNow()
+
+    function makeException(error: Error): Exception {
+      if (error.message) {
+        return {
+          type: error.name,
+          message: error.message,
+        }
+      }
+      return {
+        type: error.name,
+      }
+    }
+
     try {
       world.attach = makeAttach(this.id, testCaseStartedId, listener)
       world.log = (text: string) => {
@@ -99,6 +113,7 @@ export default abstract class TestStep implements ITestStep {
           duration,
           status: messages.TestStepResultStatus.FAILED,
           message,
+          exception: makeException(error),
         },
         listener
       )
