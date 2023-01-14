@@ -61,7 +61,7 @@
     "@cucumber/tag-expressions": "^5.0.0",
     "@types/stack-utils": "2.0.1",
     "commander": "9.5.0",
-    "glob": "8.0.3",
+    "glob": "8.1.0",
     "stack-utils": "2.0.6"
   },
   "peerDependencies": {
