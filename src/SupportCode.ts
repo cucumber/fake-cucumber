@@ -43,6 +43,7 @@ export default class SupportCode {
   ) {}
 
   public defineParameterType(
+    sourceReference: messages.SourceReference,
     parameterTypeDefinition: IParameterTypeDefinition
   ) {
     const parameterType = new ParameterType<any>(
