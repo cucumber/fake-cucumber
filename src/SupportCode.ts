@@ -59,6 +59,7 @@ export default class SupportCode {
     this.parameterTypeMessages.push({
       parameterType: {
         id: this.newId(),
+        sourceReference,
         name: parameterType.name,
         regularExpressions: parameterType.regexpStrings.slice(),
         preferForRegularExpressionMatch: parameterType.preferForRegexpMatch,
