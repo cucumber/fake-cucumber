@@ -1,5 +1,6 @@
 import { Query } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
+import { SourceReference } from '@cucumber/messages'
 import assert from 'assert'
 
 import { withSourceFramesOnlyStackTrace } from '../src/ErrorMessageGenerator'
@@ -12,7 +13,6 @@ import SupportCode from '../src/SupportCode'
 import TestPlan from '../src/TestPlan'
 import { EnvelopeListener, RunOptions } from '../src/types'
 import { gherkinMessages, streamToArray } from './TestHelpers'
-import { SourceReference } from "@cucumber/messages";
 
 const defaultRunOptions: RunOptions = { allowedRetries: 0 }
 
