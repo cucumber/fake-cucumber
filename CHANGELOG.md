@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [16.2.0] - 2023-05-13
 ### Added
 - Upgrade to `@cucumber/messages` `21`
 - Add `sourceReference` to `parameterType` ([#90](https://github.com/cucumber/fake-cucumber/pull/90))
@@ -199,7 +201,8 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 ### Added
 - First release
 
-[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...main
+[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.2.0...main
+[16.2.0]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...main
 [16.1.0]: https://github.com/cucumber/fake-cucumber/compare/v16.0.0...main
 [16.0.0]: https://github.com/cucumber/fake-cucumber/compare/v15.0.0...main
 [15.0.0]: https://github.com/cucumber/fake-cucumber/compare/v14.0.0...v15.0.0
