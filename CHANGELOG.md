@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Upgrade to `@cucumber/messages` `21`
+- Add `sourceReference` to `parameterType` ([#90](https://github.com/cucumber/fake-cucumber/pull/90))
 
 ## [16.1.0] - 2022-12-17
 ### Added

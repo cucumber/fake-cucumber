@@ -48,7 +48,10 @@ function defineParameterType0(
   parameterTypeDefinition: IParameterTypeDefinition
 ) {
   //@ts-ignore
-  global.supportCode.defineParameterType(parameterTypeDefinition)
+  global.supportCode.defineParameterType(
+    getSourceReference(new Error().stack),
+    parameterTypeDefinition
+  )
 }
 
 function getSourceReference(stackTrace: string): messages.SourceReference {

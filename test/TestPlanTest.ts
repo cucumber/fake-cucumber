@@ -1,5 +1,6 @@
 import { Query } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
+import { SourceReference } from '@cucumber/messages'
 import assert from 'assert'
 
 import { withSourceFramesOnlyStackTrace } from '../src/ErrorMessageGenerator'
@@ -157,7 +158,14 @@ describe('TestPlan', () => {
   }
 
   it('defines parameter types', async () => {
-    supportCode.defineParameterType({
+    const sourceReference: SourceReference = {
+      uri: 'path/to/thing.js',
+      location: {
+        line: 5,
+        column: 10,
+      },
+    }
+    supportCode.defineParameterType(sourceReference, {
       name: 'flight',
       regexp: /[A-Z]{3}-[A-Z]{3}/,
       transformer(name) {
@@ -193,6 +201,7 @@ describe('TestPlan', () => {
       .filter((m) => m.parameterType)
       .map((m) => m.parameterType)
     assert.deepStrictEqual(parameterTypes.length, 1)
+    assert.strictEqual(parameterTypes[0].sourceReference, sourceReference)
     assert.strictEqual(parameterTypes[0].name, 'flight')
   })
 

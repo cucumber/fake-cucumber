@@ -43,6 +43,7 @@ export default class SupportCode {
   ) {}
 
   public defineParameterType(
+    sourceReference: messages.SourceReference,
     parameterTypeDefinition: IParameterTypeDefinition
   ) {
     const parameterType = new ParameterType<any>(
@@ -58,6 +59,7 @@ export default class SupportCode {
     this.parameterTypeMessages.push({
       parameterType: {
         id: this.newId(),
+        sourceReference,
         name: parameterType.name,
         regularExpressions: parameterType.regexpStrings.slice(),
         preferForRegularExpressionMatch: parameterType.preferForRegexpMatch,
