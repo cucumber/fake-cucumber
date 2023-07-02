@@ -75,7 +75,8 @@ export interface HookOptions {
 export type AnyBody = (...args: readonly unknown[]) => unknown
 export type Attach = (
   data: string | Buffer | Readable,
-  mediaType: string
+  mediaType: string,
+  fileName?: string
 ) => void | Promise<void>
 export type Log = (text: string) => void | Promise<void>
 

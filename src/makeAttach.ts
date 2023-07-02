@@ -11,7 +11,8 @@ export default function makeAttach(
 ): Attach {
   return function attach(
     data: string | Buffer | Readable,
-    mediaType: string
+    mediaType: string,
+    fileName?: string
   ): void | Promise<void> {
     let body: string
     let contentEncoding: messages.AttachmentContentEncoding
@@ -26,6 +27,7 @@ export default function makeAttach(
           mediaType,
           body,
           contentEncoding,
+          fileName,
         },
       })
     } else if (Buffer.isBuffer(data)) {
@@ -38,6 +40,7 @@ export default function makeAttach(
           mediaType,
           body,
           contentEncoding,
+          fileName,
         },
       })
     } else if (
@@ -67,6 +70,7 @@ export default function makeAttach(
               mediaType,
               body,
               contentEncoding,
+              fileName,
             },
           })
           resolve()
