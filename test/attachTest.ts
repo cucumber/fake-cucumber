@@ -79,7 +79,7 @@ describe('#attach', () => {
     assert.strictEqual(buffer.length, expectedLength)
   })
 
-  it("can optionally include a filename", () => {
+  it('can optionally include a filename', () => {
     const envelopes: messages.Envelope[] = []
     const listener: EnvelopeListener = (envelope: messages.Envelope) =>
       envelopes.push(envelope)
@@ -103,5 +103,5 @@ describe('#attach', () => {
       },
     }
     assert.deepStrictEqual(envelopes[0], expected)
-  });
+  })
 })
