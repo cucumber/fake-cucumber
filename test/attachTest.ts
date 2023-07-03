@@ -26,6 +26,7 @@ describe('#attach', () => {
         testCaseStartedId: 'the-test-case-started-id',
         testStepId: 'the-test-step-id',
         body: 'hello',
+        fileName: undefined,
       },
     }
     assert.deepStrictEqual(envelopes[0], expected)
@@ -52,6 +53,7 @@ describe('#attach', () => {
         testStepId: 'the-test-step-id',
         body: buffer.toString('base64'),
         contentEncoding: messages.AttachmentContentEncoding.BASE64,
+        fileName: undefined,
       },
     }
     assert.deepStrictEqual(envelopes[0], expected)
@@ -75,5 +77,31 @@ describe('#attach', () => {
     const expectedLength = 1739 // wc -c < ./attachments/cucumber.png
     const buffer = Buffer.from(envelopes[0].attachment.body, 'base64')
     assert.strictEqual(buffer.length, expectedLength)
+  })
+
+  it('can optionally include a filename', () => {
+    const envelopes: messages.Envelope[] = []
+    const listener: EnvelopeListener = (envelope: messages.Envelope) =>
+      envelopes.push(envelope)
+
+    const attach = makeAttach(
+      'the-test-step-id',
+      'the-test-case-started-id',
+      listener
+    )
+
+    attach('hello', 'text/plain', 'hello.txt')
+
+    const expected: messages.Envelope = {
+      attachment: {
+        mediaType: 'text/plain',
+        contentEncoding: messages.AttachmentContentEncoding.IDENTITY,
+        testCaseStartedId: 'the-test-case-started-id',
+        testStepId: 'the-test-step-id',
+        body: 'hello',
+        fileName: 'hello.txt',
+      },
+    }
+    assert.deepStrictEqual(envelopes[0], expected)
   })
 })
