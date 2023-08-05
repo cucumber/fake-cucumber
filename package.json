@@ -38,7 +38,7 @@
     "@cucumber/messages": "^22.0.0",
     "@types/glob": "8.1.0",
     "@types/mocha": "10.0.1",
-    "@types/node": "18.17.2",
+    "@types/node": "18.17.3",
     "@types/stream-buffers": "3.0.4",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
