@@ -1,5 +1,5 @@
 # cucumber/fake-cucumber
-FROM node:19-alpine
+FROM node:20-alpine
 
 RUN mkdir -p /home/node/app
 ADD src /home/node/app/src
