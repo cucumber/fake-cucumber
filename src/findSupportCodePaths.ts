@@ -1,13 +1,11 @@
 import fs from 'fs'
-import glob from 'glob'
+import { glob } from 'glob'
 import p from 'path'
-import { promisify } from 'util'
 
-const globPromise = promisify(glob)
+const codeFileExts = ['.js', '.ts']
 
 function globCode(dir: string) {
-  // TODO: Provide a way to configure the glob
-  return globPromise(`${dir}/**/*.{js,ts}`)
+  return glob(`${dir}/**/*.{js,ts}`, { posix: true, dotRelative: true })
 }
 
 export default async function findSupportCodePaths(
@@ -22,11 +20,12 @@ export default async function findSupportCodePaths(
         files.add(p.resolve(codePath))
       }
     } else if (stats.isFile()) {
-      const dir = p.dirname(path)
-      const codePaths = await globCode(dir)
-      if (codePaths.includes(path)) {
+      const ext = p.extname(path)
+      if (codeFileExts.indexOf(ext) > -1) {
         files.add(p.resolve(path))
       } else {
+        const dir = p.dirname(path)
+        const codePaths = await globCode(dir)
         for (const codePath of codePaths) {
           files.add(p.resolve(codePath))
         }
