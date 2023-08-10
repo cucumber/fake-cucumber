@@ -4,7 +4,7 @@ import p from 'path'
 
 function globCode(dir: string) {
   // TODO: Provide a way to configure the glob
-  return glob(`${dir}/**/*.{js,ts}`)
+  return glob(`${dir}/**/*.{js,ts}`, { posix: true, dotRelative: true })
 }
 
 export default async function findSupportCodePaths(
@@ -21,7 +21,6 @@ export default async function findSupportCodePaths(
     } else if (stats.isFile()) {
       const dir = p.dirname(path)
       const codePaths = await globCode(dir)
-      console.log('Code paths found for ' + path, codePaths)
       if (codePaths.includes(path)) {
         files.add(p.resolve(path))
       } else {
