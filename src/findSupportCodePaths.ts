@@ -1,13 +1,10 @@
 import fs from 'fs'
 import { glob } from 'glob'
 import p from 'path'
-import { promisify } from 'util'
-
-const globPromise = promisify(glob)
 
 function globCode(dir: string) {
   // TODO: Provide a way to configure the glob
-  return globPromise(`${dir}/**/*.{js,ts}`)
+  return glob(`${dir}/**/*.{js,ts}`)
 }
 
 export default async function findSupportCodePaths(
