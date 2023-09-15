@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/cucumber/fake-cucumber",
   "devDependencies": {
-    "@cucumber/gherkin": "^26.0.0",
+    "@cucumber/gherkin": "^27.0.0",
     "@cucumber/gherkin-streams": "^5.0.1",
     "@cucumber/gherkin-utils": "^8.0.0",
     "@cucumber/message-streams": "^4.0.1",
