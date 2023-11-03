@@ -58,7 +58,7 @@
   "dependencies": {
     "@cucumber/ci-environment": "^9.0.4",
     "@cucumber/cucumber-expressions": "^16.0.0",
-    "@cucumber/tag-expressions": "^5.0.0",
+    "@cucumber/tag-expressions": "^6.0.0",
     "@types/stack-utils": "2.0.2",
     "commander": "11.1.0",
     "glob": "10.3.10",
