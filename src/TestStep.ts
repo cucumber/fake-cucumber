@@ -99,6 +99,10 @@ export default abstract class TestStep implements ITestStep {
         {
           duration,
           status,
+          message:
+            status === messages.TestStepResultStatus.PENDING
+              ? 'TODO'
+              : undefined,
         },
         listener
       )
