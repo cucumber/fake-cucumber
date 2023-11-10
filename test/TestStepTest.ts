@@ -219,7 +219,7 @@ describe('TestStep', () => {
       )
     })
 
-    it('returns a TestStepResult with status PENDING when the sole step definitions returns "pending"', async () => {
+    it('returns a TestStepResult with status PENDING and todo message when the sole step definitions returns "pending"', async () => {
       const testStepResult = await pendingPickleTestStep.execute(
         world,
         'some-testCaseStartedId',
@@ -227,6 +227,7 @@ describe('TestStep', () => {
         true
       )
       assert.strictEqual(testStepResult.status, 'PENDING')
+      assert.strictEqual(testStepResult.message, 'TODO')
       assert.notDeepStrictEqual(
         testStepResult.duration,
         TimeConversion.millisecondsToDuration(0)

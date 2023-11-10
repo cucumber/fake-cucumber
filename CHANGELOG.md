@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Include `message` prop in result for pending steps ([#106](https://github.com/cucumber/fake-cucumber/pull/106))
 
 ## [16.3.0] - 2023-07-03
 ### Added
