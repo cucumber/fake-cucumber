@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [16.4.0] - 2023-11-10
 ### Added
 - Include `message` prop in result for pending steps ([#106](https://github.com/cucumber/fake-cucumber/pull/106))
 
@@ -207,7 +209,8 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 ### Added
 - First release
 
-[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.3.0...main
+[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.4.0...main
+[16.4.0]: https://github.com/cucumber/fake-cucumber/compare/v16.3.0...main
 [16.3.0]: https://github.com/cucumber/fake-cucumber/compare/v16.2.0...main
 [16.2.0]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...main
 [16.1.0]: https://github.com/cucumber/fake-cucumber/compare/v16.0.0...main
