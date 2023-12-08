@@ -56,7 +56,7 @@
     "typescript": "5.3.3"
   },
   "dependencies": {
-    "@cucumber/ci-environment": "^9.0.4",
+    "@cucumber/ci-environment": "^10.0.0",
     "@cucumber/cucumber-expressions": "^16.0.0",
     "@cucumber/tag-expressions": "^6.0.0",
     "@types/stack-utils": "2.0.3",
