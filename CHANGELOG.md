@@ -209,12 +209,12 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 ### Added
 - First release
 
-[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.4.0...main
-[16.4.0]: https://github.com/cucumber/fake-cucumber/compare/v16.3.0...main
-[16.3.0]: https://github.com/cucumber/fake-cucumber/compare/v16.2.0...main
-[16.2.0]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...main
-[16.1.0]: https://github.com/cucumber/fake-cucumber/compare/v16.0.0...main
-[16.0.0]: https://github.com/cucumber/fake-cucumber/compare/v15.0.0...main
+[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.4.0...HEAD
+[16.4.0]: https://github.com/cucumber/fake-cucumber/compare/v16.3.0...v16.4.0
+[16.3.0]: https://github.com/cucumber/fake-cucumber/compare/v16.2.0...v16.3.0
+[16.2.0]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...v16.1.0
+[16.1.0]: https://github.com/cucumber/fake-cucumber/compare/v16.0.0...v16.1.0
+[16.0.0]: https://github.com/cucumber/fake-cucumber/compare/v15.0.0...v16.0.0
 [15.0.0]: https://github.com/cucumber/fake-cucumber/compare/v14.0.0...v15.0.0
 [14.0.0]: https://github.com/cucumber/fake-cucumber/compare/v13.0.0...v14.0.0
 [13.0.0]: https://github.com/cucumber/fake-cucumber/compare/v12.0.2...v13.0.0
