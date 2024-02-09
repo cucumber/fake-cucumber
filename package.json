@@ -47,7 +47,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-simple-import-sort": "^11.0.0",
     "mocha": "10.3.0",
     "prettier": "^3.0.0",
     "source-map-support": "0.5.21",
