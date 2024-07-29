@@ -13,6 +13,7 @@ export interface RunOptions {
 export interface IWorld {
   attach: Attach
   log: Log
+  link: Link
 }
 
 export interface ITestPlan {
@@ -79,6 +80,7 @@ export type Attach = (
   fileName?: string
 ) => void | Promise<void>
 export type Log = (text: string) => void | Promise<void>
+export type Link = (text: string) => void | Promise<void>
 
 export type MakePickleTestStep = (
   testStepId: string,

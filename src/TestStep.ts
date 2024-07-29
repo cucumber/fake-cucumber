@@ -89,6 +89,9 @@ export default abstract class TestStep implements ITestStep {
       world.log = (text: string) => {
         world.attach(text, 'text/x.cucumber.log+plain')
       }
+      world.link = (uri: string) => {
+        world.attach(uri, 'text/uri-list')
+      }
 
       const result = await this.supportCodeExecutors[0].execute(world)
       const finish = this.stopwatch.stopwatchNow()
