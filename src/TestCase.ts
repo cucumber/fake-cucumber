@@ -46,6 +46,9 @@ export default class TestCase implements ITestCase {
       log: () => {
         throw new Error('Log is not ready')
       },
+      link: () => {
+        throw new Error('Link is not ready')
+      },
     }
 
     const testStepResults: messages.TestStepResult[] = []

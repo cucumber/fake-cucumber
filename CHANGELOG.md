@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Add support for link attachments ([#121](https://github.com/cucumber/fake-cucumber/pull/121))
 
 ## [16.4.0] - 2023-11-10
 ### Added
