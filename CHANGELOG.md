@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [16.5.0] - 2024-08-01
 ### Added
 - Add support for link attachments ([#121](https://github.com/cucumber/fake-cucumber/pull/121))
 
@@ -211,7 +213,8 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 ### Added
 - First release
 
-[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.4.0...HEAD
+[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v16.5.0...HEAD
+[16.5.0]: https://github.com/cucumber/fake-cucumber/compare/v16.4.0...v16.5.0
 [16.4.0]: https://github.com/cucumber/fake-cucumber/compare/v16.3.0...v16.4.0
 [16.3.0]: https://github.com/cucumber/fake-cucumber/compare/v16.2.0...v16.3.0
 [16.2.0]: https://github.com/cucumber/fake-cucumber/compare/v16.1.0...v16.1.0
