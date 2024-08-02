@@ -1,7 +1,6 @@
 import { Query } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
 
-import EmptyPickleTestStep from './EmptyPickleTestStep'
 import { MakeErrorMessage } from './ErrorMessageGenerator'
 import IClock from './IClock'
 import IStopwatch from './IStopwatch'
