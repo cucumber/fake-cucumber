@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Removed
+- BREAKING CHANGE: Remove synthetic step for empty pickles ([#125](https://github.com/cucumber/fake-cucumber/pull/125))
 
 ## [16.5.0] - 2024-08-01
 ### Added
