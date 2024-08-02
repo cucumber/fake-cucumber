@@ -32,3 +32,17 @@ jobs:
       - uses: cucumber/action-publish-npm@v1.1.1
         with:
           npm-token: ${{ secrets.NPM_TOKEN }}
+
+  create-github-release:
+    name: Create GitHub Release and Git tag
+    needs: [ publish-npm ]
+    runs-on: ubuntu-latest
+    environment: Release
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cucumber/action-create-github-release@v1.1.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
