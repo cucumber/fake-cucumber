@@ -1,7 +1,6 @@
 import { Query } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
 
-import EmptyPickleTestStep from './EmptyPickleTestStep'
 import { MakeErrorMessage } from './ErrorMessageGenerator'
 import IClock from './IClock'
 import IStopwatch from './IStopwatch'
@@ -27,21 +26,6 @@ export default function makeTestCase(
   makePickleTestStep: MakePickleTestStep,
   makeHookStep: MakeHookTestStep
 ): TestCase {
-  if (pickle.steps.length === 0) {
-    const id = newId()
-    const undefinedStep = new EmptyPickleTestStep(
-      id,
-      undefined,
-      true,
-      [],
-      [],
-      clock,
-      stopwatch,
-      makeErrorMessage
-    )
-    return new TestCase(newId(), [undefinedStep], pickle.id, clock)
-  }
-
   const beforeHookSteps = makeHookSteps(
     pickle,
     beforeHooks,
