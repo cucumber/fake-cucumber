@@ -58,7 +58,7 @@ export interface IHook {
 }
 
 export interface ITestCase {
-  toMessage(): messages.Envelope
+  toMessage(testRunStartedId: string): messages.Envelope
 
   execute(
     listener: EnvelopeListener,

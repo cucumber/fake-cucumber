@@ -14,9 +14,10 @@ export default class TestCase implements ITestCase {
     private readonly clock: IClock
   ) {}
 
-  public toMessage(): messages.Envelope {
+  public toMessage(testRunStartedId: string): messages.Envelope {
     return {
       testCase: {
+        testRunStartedId,
         id: this.id,
         pickleId: this.pickleId,
         testSteps: this.testSteps.map((step) => step.toMessage()),

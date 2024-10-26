@@ -4,7 +4,7 @@ import SupportCode from './SupportCode'
 import { EnvelopeListener, ITestCase, ITestPlan, RunOptions } from './types'
 
 export default class TestPlan implements ITestPlan {
-  private readonly id = this.newId()
+  private readonly runId = this.newId()
 
   constructor(
     private readonly newId: messages.IdGenerator.NewId,
@@ -33,14 +33,14 @@ export default class TestPlan implements ITestPlan {
 
     listener({
       testRunStarted: {
-        id: this.id,
+        id: this.runId,
         timestamp: messages.TimeConversion.millisecondsSinceEpochToTimestamp(
           this.supportCode.clock.clockNow()
         ),
       },
     })
     for (const testCase of this.testCases) {
-      listener(testCase.toMessage())
+      listener(testCase.toMessage(this.runId))
     }
     let success = true
     // TODO: By using Promise.all here we could execute in parallel
@@ -64,7 +64,7 @@ export default class TestPlan implements ITestPlan {
     }
     listener({
       testRunFinished: {
-        testRunStartedId: this.id,
+        testRunStartedId: this.runId,
         timestamp: messages.TimeConversion.millisecondsSinceEpochToTimestamp(
           this.supportCode.clock.clockNow()
         ),
