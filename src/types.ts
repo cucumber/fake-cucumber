@@ -58,7 +58,7 @@ export interface IHook {
 }
 
 export interface ITestCase {
-  toMessage(testRunStartedId: string): messages.Envelope
+  toMessage(): messages.Envelope
 
   execute(
     listener: EnvelopeListener,
@@ -104,6 +104,7 @@ export type MakeHookTestStep = (
 ) => ITestStep
 
 export type MakeTestCase = (
+  runId: string,
   pickle: messages.Pickle,
   stepDefinitions: readonly IStepDefinition[],
   beforeHooks: readonly IHook[],

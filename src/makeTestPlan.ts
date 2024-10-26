@@ -12,9 +12,11 @@ export default function makeTestPlan(
   runOptions: RunOptions,
   makeTestCase: MakeTestCase
 ): ITestPlan {
+  const runId = supportCode.newId()
   const pickles = gherkinQuery.getPickles()
   const testCases = pickles.map((pickle) =>
     makeTestCase(
+      runId,
       pickle,
       supportCode.stepDefinitions,
       supportCode.beforeHooks,
@@ -29,5 +31,5 @@ export default function makeTestPlan(
     )
   )
 
-  return new TestPlan(supportCode.newId, testCases, supportCode, runOptions)
+  return new TestPlan(runId, testCases, supportCode, runOptions)
 }
