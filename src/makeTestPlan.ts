@@ -29,5 +29,5 @@ export default function makeTestPlan(
     )
   )
 
-  return new TestPlan(testCases, supportCode, runOptions)
+  return new TestPlan(supportCode.newId, testCases, supportCode, runOptions)
 }

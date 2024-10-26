@@ -4,7 +4,10 @@ import SupportCode from './SupportCode'
 import { EnvelopeListener, ITestCase, ITestPlan, RunOptions } from './types'
 
 export default class TestPlan implements ITestPlan {
+  private readonly id = this.newId()
+
   constructor(
+    private readonly newId: messages.IdGenerator.NewId,
     private readonly testCases: ITestCase[],
     private readonly supportCode: SupportCode,
     private readonly runOptions: RunOptions
@@ -30,6 +33,7 @@ export default class TestPlan implements ITestPlan {
 
     listener({
       testRunStarted: {
+        id: this.id,
         timestamp: messages.TimeConversion.millisecondsSinceEpochToTimestamp(
           this.supportCode.clock.clockNow()
         ),
@@ -60,6 +64,7 @@ export default class TestPlan implements ITestPlan {
     }
     listener({
       testRunFinished: {
+        testRunStartedId: this.id,
         timestamp: messages.TimeConversion.millisecondsSinceEpochToTimestamp(
           this.supportCode.clock.clockNow()
         ),
