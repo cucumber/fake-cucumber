@@ -52,6 +52,7 @@ describe('TestCase', () => {
       const testSteps: ITestStep[] = [passedPickleTestStep]
       const testCase = new TestCase(
         'some-test-case-id',
+        'run-id',
         testSteps,
         'some-pickle-id',
         new IncrementClock()
@@ -77,6 +78,7 @@ describe('TestCase', () => {
       const testSteps: ITestStep[] = [passedPickleTestStep]
       const testCase = new TestCase(
         'some-test-case-id',
+        'run-id',
         testSteps,
         'some-pickle-id',
         new IncrementClock()

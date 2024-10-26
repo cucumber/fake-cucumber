@@ -4,7 +4,7 @@ import {
 } from '@cucumber/cucumber-expressions'
 import { Query } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
-import { TimeConversion } from '@cucumber/messages'
+import { HookType, TimeConversion } from '@cucumber/messages'
 import assert from 'assert'
 
 import {
@@ -153,9 +153,15 @@ describe('TestStep', () => {
       withSourceFramesOnlyStackTrace()
     )
 
-    const hook = new Hook('hook-id', null, { uri: 'hook.ts' }, () => {
-      throw new Error()
-    })
+    const hook = new Hook(
+      'hook-id',
+      HookType.AFTER_TEST_CASE,
+      null,
+      { uri: 'hook.ts' },
+      () => {
+        throw new Error()
+      }
+    )
     failedHookTestStep = makeHookTestStep(
       {
         name: 'hello',
