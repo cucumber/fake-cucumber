@@ -4,6 +4,7 @@ import {
   ParameterTypeRegistry,
 } from '@cucumber/cucumber-expressions'
 import * as messages from '@cucumber/messages'
+import { HookType } from '@cucumber/messages'
 
 import DateClock from './DateClock'
 import { MakeErrorMessage, withFullStackTrace } from './ErrorMessageGenerator'
@@ -106,7 +107,12 @@ export default class SupportCode {
     body?: AnyBody
   ) {
     this.registerBeforeHook(
-      this.makeHook(sourceReference, tagExpressionOptionsOrBody, body)
+      this.makeHook(
+        HookType.BEFORE_TEST_CASE,
+        sourceReference,
+        tagExpressionOptionsOrBody,
+        body
+      )
     )
   }
 
@@ -120,7 +126,12 @@ export default class SupportCode {
     body?: AnyBody
   ) {
     this.registerAfterHook(
-      this.makeHook(sourceReference, tagExpressionOptionsOrBody, body)
+      this.makeHook(
+        HookType.AFTER_TEST_CASE,
+        sourceReference,
+        tagExpressionOptionsOrBody,
+        body
+      )
     )
   }
 
@@ -129,6 +140,7 @@ export default class SupportCode {
   }
 
   private makeHook(
+    type: HookType,
     sourceReference: messages.SourceReference,
     tagExpressionOptionsOrBody: string | HookOptions | AnyBody,
     body?: AnyBody
@@ -147,6 +159,13 @@ export default class SupportCode {
       typeof tagExpressionOptionsOrBody === 'function'
         ? tagExpressionOptionsOrBody
         : body
-    return new Hook(this.newId(), tagExpression, sourceReference, body, name)
+    return new Hook(
+      this.newId(),
+      type,
+      tagExpression,
+      sourceReference,
+      body,
+      name
+    )
   }
 }
