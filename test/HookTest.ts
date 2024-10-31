@@ -1,9 +1,9 @@
-import * as messages from '@cucumber/messages'
-import { HookType } from '@cucumber/messages'
-import assert from 'assert'
+import * as messages from "@cucumber/messages";
+import { Envelope, HookType } from "@cucumber/messages";
+import assert from "assert";
 
-import Hook from '../src/Hook'
-import TestWorld from './TestWorld'
+import Hook from "../src/Hook";
+import TestWorld from "./TestWorld";
 
 describe('Hook', () => {
   describe('#match', () => {
@@ -77,6 +77,28 @@ describe('Hook', () => {
       const executor = hook.match(pickle)
 
       assert.strictEqual(executor.execute(new TestWorld()), 'something')
+    })
+  })
+
+  describe('#toMessage', () => {
+    it('converts to hook message', () => {
+      const hook = new Hook(
+        'hook-id',
+        HookType.BEFORE_TEST_CASE,
+        null,
+        { uri: '/some/file.ts' },
+        () => {
+          return 'something'
+        }
+      )
+
+      assert.deepStrictEqual<Envelope>(hook.toMessage(), {
+        hook: {
+          id: 'hook-id',
+          type: HookType.BEFORE_TEST_CASE,
+          sourceReference: { uri: '/some/file.ts' },
+        },
+      })
     })
   })
 })
