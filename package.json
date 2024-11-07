@@ -35,7 +35,7 @@
     "@cucumber/gherkin-streams": "^5.0.1",
     "@cucumber/gherkin-utils": "^9.0.0",
     "@cucumber/message-streams": "^4.0.1",
-    "@cucumber/messages": "^24.0.0",
+    "@cucumber/messages": "^27.0.0",
     "@types/glob": "8.1.0",
     "@types/mocha": "10.0.9",
     "@types/node": "20.17.6",
