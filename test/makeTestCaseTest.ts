@@ -4,6 +4,7 @@ import {
 } from '@cucumber/cucumber-expressions'
 import { Query as GherkinQuery } from '@cucumber/gherkin-utils'
 import * as messages from '@cucumber/messages'
+import { HookType } from '@cucumber/messages'
 import assert from 'assert'
 
 import { withSourceFramesOnlyStackTrace } from '../src/ErrorMessageGenerator'
@@ -21,6 +22,7 @@ describe('makeTestCase', () => {
     const pickle = makePickleWithTwoSteps()
     const stepDefinitions = makeStepDefinitions()
     const testCase = makeTestCase(
+      'run-id',
       pickle,
       stepDefinitions,
       [],
@@ -53,6 +55,7 @@ describe('makeTestCase', () => {
         uri: 'uri',
       }
       const testCase = makeTestCase(
+        'run-id',
         pickle,
         [],
         [],
@@ -83,10 +86,19 @@ describe('makeTestCase', () => {
   context('when hooks are defined', () => {
     context('when a before hook matches', () => {
       it('adds a step before the scenario ones', () => {
-        const beforeHooks = [new Hook('hook-id', null, null, () => null)]
+        const beforeHooks = [
+          new Hook(
+            'hook-id',
+            HookType.BEFORE_TEST_CASE,
+            null,
+            null,
+            () => null
+          ),
+        ]
         const pickle = makePickleWithTwoSteps()
         const stepDefinitions = makeStepDefinitions()
         const testCase = makeTestCase(
+          'run-id',
           pickle,
           stepDefinitions,
           beforeHooks,
@@ -114,10 +126,13 @@ describe('makeTestCase', () => {
 
   context('when an after hook matches', () => {
     it('adds a step after the scenario ones', () => {
-      const afterHooks = [new Hook('hook-id', null, null, () => null)]
+      const afterHooks = [
+        new Hook('hook-id', HookType.BEFORE_TEST_CASE, null, null, () => null),
+      ]
       const pickle = makePickleWithTwoSteps()
       const stepDefinitions = makeStepDefinitions()
       const testCase = makeTestCase(
+        'run-id',
         pickle,
         stepDefinitions,
         [],

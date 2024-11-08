@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Populate `TestRunStarted.id`, `TestCase.testRunStartedId` and `TestRunFinished.testRunStartedId` on messages
+- Populate `Hook.type` on messages
+
+### Changed
+- Changed signatures of `makeTestCase` and `makeTestPlan`
 
 ## [17.0.0] - 2024-08-29
 ### Removed

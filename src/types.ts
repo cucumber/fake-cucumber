@@ -104,6 +104,7 @@ export type MakeHookTestStep = (
 ) => ITestStep
 
 export type MakeTestCase = (
+  runId: string,
   pickle: messages.Pickle,
   stepDefinitions: readonly IStepDefinition[],
   beforeHooks: readonly IHook[],

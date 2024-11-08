@@ -248,6 +248,7 @@ async function makeTestPlan(
     .getPickles()
     .map((pickle) =>
       makeTestCase(
+        'run-id',
         pickle,
         supportCode.stepDefinitions,
         supportCode.beforeHooks,
@@ -262,7 +263,7 @@ async function makeTestPlan(
       )
     )
 
-  return new TestPlan(testCases, supportCode, runOptions)
+  return new TestPlan('run-id', testCases, supportCode, runOptions)
 }
 
 function extractEnvelopes<M>(

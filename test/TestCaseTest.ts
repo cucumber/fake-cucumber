@@ -3,6 +3,7 @@ import {
   ParameterTypeRegistry,
 } from '@cucumber/cucumber-expressions'
 import * as messages from '@cucumber/messages'
+import { Envelope } from '@cucumber/messages'
 import assert from 'assert'
 
 import {
@@ -16,42 +17,40 @@ import ExpressionStepDefinition from '../src/ExpressionStepDefinition'
 import TestCase from '../src/TestCase'
 
 describe('TestCase', () => {
+  let passedPickleTestStep: ITestStep
+  beforeEach(() => {
+    const stepDefinition = new ExpressionStepDefinition(
+      'an-id',
+      new CucumberExpression('an ambiguous step', new ParameterTypeRegistry()),
+      null,
+      () => {
+        throw new Error('Should now be run')
+      }
+    )
+
+    passedPickleTestStep = makePickleTestStep(
+      'some-test-step-id',
+      {
+        text: 'an ambiguous step',
+        type: messages.PickleStepType.UNKNOWN,
+        astNodeIds: [],
+        id: '1',
+      },
+      [stepDefinition],
+      ['some.feature:234'],
+      new IncrementClock(),
+      new IncrementStopwatch(),
+      withSourceFramesOnlyStackTrace()
+    )
+  })
+
   describe('#execute', () => {
-    let passedPickleTestStep: ITestStep
-    beforeEach(() => {
-      const stepDefinition = new ExpressionStepDefinition(
-        'an-id',
-        new CucumberExpression(
-          'an ambiguous step',
-          new ParameterTypeRegistry()
-        ),
-        null,
-        () => {
-          throw new Error('Should now be run')
-        }
-      )
-
-      passedPickleTestStep = makePickleTestStep(
-        'some-test-step-id',
-        {
-          text: 'an ambiguous step',
-          type: messages.PickleStepType.UNKNOWN,
-          astNodeIds: [],
-          id: '1',
-        },
-        [stepDefinition],
-        ['some.feature:234'],
-        new IncrementClock(),
-        new IncrementStopwatch(),
-        withSourceFramesOnlyStackTrace()
-      )
-    })
-
     it('emits TestCaseStarted and TestCaseFinished messages', async () => {
       const emitted: messages.Envelope[] = []
       const testSteps: ITestStep[] = [passedPickleTestStep]
       const testCase = new TestCase(
         'some-test-case-id',
+        'run-id',
         testSteps,
         'some-pickle-id',
         new IncrementClock()
@@ -77,6 +76,7 @@ describe('TestCase', () => {
       const testSteps: ITestStep[] = [passedPickleTestStep]
       const testCase = new TestCase(
         'some-test-case-id',
+        'run-id',
         testSteps,
         'some-pickle-id',
         new IncrementClock()
@@ -93,6 +93,28 @@ describe('TestCase', () => {
       ).testCaseFinished
 
       assert.strictEqual(testCaseFinished.willBeRetried, true)
+    })
+  })
+
+  describe('#toMessage', () => {
+    it('converts to TestCase message', () => {
+      const testSteps: ITestStep[] = [passedPickleTestStep]
+      const testCase = new TestCase(
+        'some-test-case-id',
+        'run-id',
+        testSteps,
+        'some-pickle-id',
+        new IncrementClock()
+      )
+
+      assert.deepStrictEqual<Envelope>(testCase.toMessage(), {
+        testCase: {
+          id: 'some-test-case-id',
+          testRunStartedId: 'run-id',
+          pickleId: 'some-pickle-id',
+          testSteps: testSteps.map((testStep) => testStep.toMessage()),
+        },
+      })
     })
   })
 })

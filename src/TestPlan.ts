@@ -5,6 +5,7 @@ import { EnvelopeListener, ITestCase, ITestPlan, RunOptions } from './types'
 
 export default class TestPlan implements ITestPlan {
   constructor(
+    private readonly runId: string,
     private readonly testCases: ITestCase[],
     private readonly supportCode: SupportCode,
     private readonly runOptions: RunOptions
@@ -30,6 +31,7 @@ export default class TestPlan implements ITestPlan {
 
     listener({
       testRunStarted: {
+        id: this.runId,
         timestamp: messages.TimeConversion.millisecondsSinceEpochToTimestamp(
           this.supportCode.clock.clockNow()
         ),
@@ -60,6 +62,7 @@ export default class TestPlan implements ITestPlan {
     }
     listener({
       testRunFinished: {
+        testRunStartedId: this.runId,
         timestamp: messages.TimeConversion.millisecondsSinceEpochToTimestamp(
           this.supportCode.clock.clockNow()
         ),

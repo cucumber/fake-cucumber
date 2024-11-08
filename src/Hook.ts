@@ -1,4 +1,5 @@
 import * as messages from '@cucumber/messages'
+import { HookType } from '@cucumber/messages'
 import parseTagExpression from '@cucumber/tag-expressions'
 
 import SupportCodeExecutor from './SupportCodeExecutor'
@@ -7,6 +8,7 @@ import { AnyBody, IHook, ISupportCodeExecutor } from './types'
 export default class Hook implements IHook {
   constructor(
     public readonly id: string,
+    private readonly type: HookType,
     private readonly tagExpression: string | null,
     private readonly sourceReference: messages.SourceReference,
     private readonly body: AnyBody,
@@ -24,6 +26,7 @@ export default class Hook implements IHook {
   public toMessage(): messages.Envelope {
     const hook: messages.Hook = {
       id: this.id,
+      type: this.type,
       sourceReference: this.sourceReference,
     }
 

@@ -9,6 +9,7 @@ const { millisecondsSinceEpochToTimestamp } = messages.TimeConversion
 export default class TestCase implements ITestCase {
   constructor(
     public readonly id: string,
+    private readonly runId: string,
     private readonly testSteps: ITestStep[],
     private readonly pickleId: string,
     private readonly clock: IClock
@@ -18,6 +19,7 @@ export default class TestCase implements ITestCase {
     return {
       testCase: {
         id: this.id,
+        testRunStartedId: this.runId,
         pickleId: this.pickleId,
         testSteps: this.testSteps.map((step) => step.toMessage()),
       },

@@ -35,7 +35,7 @@
     "@cucumber/gherkin-streams": "^5.0.1",
     "@cucumber/gherkin-utils": "^9.0.0",
     "@cucumber/message-streams": "^4.0.1",
-    "@cucumber/messages": "^24.0.0",
+    "@cucumber/messages": "^27.0.0",
     "@types/glob": "8.1.0",
     "@types/mocha": "10.0.9",
     "@types/node": "20.17.6",
@@ -56,20 +56,20 @@
     "typescript": "5.6.3"
   },
   "dependencies": {
-    "@cucumber/ci-environment": "^10.0.0",
+    "@cucumber/ci-environment": "^10.0.1",
     "@cucumber/cucumber-expressions": "^18.0.0",
-    "@cucumber/tag-expressions": "^6.0.0",
+    "@cucumber/tag-expressions": "^6.1.0",
     "@types/stack-utils": "2.0.3",
     "commander": "12.1.0",
     "glob": "11.0.0",
     "stack-utils": "2.0.6"
   },
   "peerDependencies": {
-    "@cucumber/gherkin": ">=24.0",
+    "@cucumber/gherkin": ">=30.0",
     "@cucumber/gherkin-streams": ">=5.0.1",
     "@cucumber/gherkin-utils": ">=8.0.0",
     "@cucumber/message-streams": ">=4.0.1",
-    "@cucumber/messages": ">=19.0"
+    "@cucumber/messages": ">=27.0"
   },
   "directories": {
     "test": "test"

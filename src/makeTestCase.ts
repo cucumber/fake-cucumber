@@ -14,6 +14,7 @@ import {
 } from './types'
 
 export default function makeTestCase(
+  runId: string,
   pickle: messages.Pickle,
   stepDefinitions: readonly IStepDefinition[],
   beforeHooks: readonly IHook[],
@@ -67,7 +68,7 @@ export default function makeTestCase(
     .concat(pickleTestSteps)
     .concat(afterHookSteps)
 
-  return new TestCase(newId(), testSteps, pickle.id, clock)
+  return new TestCase(newId(), runId, testSteps, pickle.id, clock)
 }
 
 function makeHookSteps(
