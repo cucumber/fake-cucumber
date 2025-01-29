@@ -53,6 +53,43 @@ describe('TestPlan', () => {
     assert.strictEqual(testStepFinisheds[0].testStepResult.status, 'PASSED')
   })
 
+  it('executes test run hooks', async () => {
+    supportCode.defineStepDefinition(null, 'a passed step', () => undefined)
+    supportCode.defineBeforeAllHook(null, () => undefined)
+    supportCode.defineBeforeAllHook(null, () => undefined)
+    supportCode.defineAfterAllHook(null, () => undefined)
+    supportCode.defineAfterAllHook(null, () => undefined)
+
+    const gherkinSource = `Feature: test
+  Scenario: test
+    Given a passed step
+`
+
+    const testPlan = await makeTestPlan(
+      gherkinSource,
+      supportCode,
+      defaultRunOptions
+    )
+
+    const envelopes: messages.Envelope[] = []
+    await testPlan.execute((envelope) => envelopes.push(envelope))
+
+    assert.deepStrictEqual(
+      extractEnvelopes(envelopes, (e) => e.testRunHookStarted).length,
+      4
+    )
+    assert.deepStrictEqual(
+      extractEnvelopes(envelopes, (e) => e.testRunHookStarted).length,
+      8
+    )
+    assert.deepStrictEqual(
+      extractEnvelopes(envelopes, (e) => e.testRunHookStarted).map(
+        (envelope) => envelope.hookId
+      ),
+      [1, 2, 4, 3]
+    )
+  })
+
   it('executes test cases multiple times with retry', async () => {
     let ran = false
     supportCode.defineStepDefinition(null, 'a sometimes-failing step', () => {
