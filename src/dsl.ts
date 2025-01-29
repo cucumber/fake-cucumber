@@ -44,6 +44,26 @@ function defineAfterHook(
   )
 }
 
+function defineBeforeAllHook(
+  body: AnyBody,
+) {
+  //@ts-ignore
+  global.supportCode.defineBeforeAllHook(
+    getSourceReference(new Error().stack),
+    body
+  )
+}
+
+function defineAfterAllHook(
+  body: AnyBody,
+) {
+  //@ts-ignore
+  global.supportCode.defineAfterAllHook(
+    getSourceReference(new Error().stack),
+    body
+  )
+}
+
 function defineParameterType0(
   parameterTypeDefinition: IParameterTypeDefinition
 ) {
@@ -76,6 +96,8 @@ const Then = defineStepDefinition
 
 const Before = defineBeforeHook
 const After = defineAfterHook
+const BeforeAll = defineBeforeAllHook
+const AfterAll = defineAfterAllHook
 const ParameterType = defineParameterType0
 const defineParameterType = deprecate(
   defineParameterType0,
@@ -84,7 +106,9 @@ const defineParameterType = deprecate(
 
 export {
   After,
+  AfterAll,
   Before,
+  BeforeAll,
   defineParameterType,
   Given,
   ParameterType,

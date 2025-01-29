@@ -35,6 +35,12 @@ export interface ITestStep {
   ): Promise<messages.TestStepResult>
 }
 
+export interface IGlobalSupportCodeExecutor {
+  readonly hookId: string
+
+  execute(): any
+}
+
 export interface ISupportCodeExecutor {
   readonly stepDefinitionId: string
 
@@ -45,6 +51,12 @@ export interface ISupportCodeExecutor {
 
 export interface IStepDefinition {
   match(pickleStep: messages.PickleStep): ISupportCodeExecutor | null
+
+  toMessage(): messages.Envelope
+}
+
+export interface IGlobalHook {
+  id: string
 
   toMessage(): messages.Envelope
 }

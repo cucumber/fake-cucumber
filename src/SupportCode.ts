@@ -9,12 +9,19 @@ import { HookType } from '@cucumber/messages'
 import DateClock from './DateClock'
 import { MakeErrorMessage, withFullStackTrace } from './ErrorMessageGenerator'
 import ExpressionStepDefinition from './ExpressionStepDefinition'
+import GlobalHook from './GlobalHook'
 import Hook from './Hook'
 import IClock from './IClock'
 import IParameterTypeDefinition from './IParameterTypeDefinition'
 import IStopwatch from './IStopwatch'
 import PerfHooksStopwatch from './PerfHooksStopwatch'
-import { AnyBody, HookOptions, IHook, IStepDefinition } from './types'
+import {
+  AnyBody,
+  HookOptions,
+  IGlobalHook,
+  IHook,
+  IStepDefinition,
+} from './types'
 
 function defaultTransformer(...args: string[]) {
   return args
@@ -29,6 +36,8 @@ export default class SupportCode {
   public readonly stepDefinitions: IStepDefinition[] = []
   public readonly beforeHooks: IHook[] = []
   public readonly afterHooks: IHook[] = []
+  public readonly beforeAllHooks: IGlobalHook[] = []
+  public readonly afterAllHooks: IGlobalHook[] = []
 
   private readonly parameterTypeRegistry = new ParameterTypeRegistry()
   private readonly expressionFactory = new ExpressionFactory(
@@ -139,6 +148,40 @@ export default class SupportCode {
     this.afterHooks.push(hook)
   }
 
+  public defineBeforeAllHook(
+    sourceReference: messages.SourceReference,
+    body: AnyBody
+  ) {
+    this.registerBeforeAllHook(
+      this.makeGlobalHook(
+        HookType.BEFORE_TEST_RUN,
+        sourceReference,
+        body
+      )
+    )
+  }
+
+  public registerBeforeAllHook(hook: IGlobalHook) {
+    this.beforeAllHooks.push(hook)
+  }
+
+  public defineAfterAllHook(
+    sourceReference: messages.SourceReference,
+    body: AnyBody
+  ) {
+    this.registerAfterAllHook(
+      this.makeGlobalHook(
+        HookType.AFTER_TEST_RUN,
+        sourceReference,
+        body
+      )
+    )
+  }
+
+  public registerAfterAllHook(hook: IGlobalHook) {
+    this.afterAllHooks.push(hook)
+  }
+
   private makeHook(
     type: HookType,
     sourceReference: messages.SourceReference,
@@ -167,5 +210,13 @@ export default class SupportCode {
       body,
       name
     )
+  }
+
+  private makeGlobalHook(
+    type: HookType,
+    sourceReference: messages.SourceReference,
+    body: AnyBody
+  ) {
+    return new GlobalHook(this.newId(), type, sourceReference, body)
   }
 }
