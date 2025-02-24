@@ -26,13 +26,14 @@ export default async function loadSupportCode(
   let tsNodeRegistered = false
   for (const supportCodePath of supportCodePaths) {
     if (supportCodePath.endsWith('.ts') && !tsNodeRegistered) {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const tsnode = require('ts-node')
       tsnode.register({
         transpileOnly: true,
       })
       tsNodeRegistered = true
     }
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require(supportCodePath)
   }
   return supportCode
