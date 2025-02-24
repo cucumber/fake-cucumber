@@ -40,4 +40,4 @@ jobs:
 
       - run: npm install-ci-test
 
-      - run: npm run eslint
+      - run: npm run lint
