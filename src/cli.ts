@@ -16,6 +16,7 @@ import runCucumber from './runCucumber'
 import { RunOptions } from './types'
 
 const program = new Command()
+program.allowExcessArguments(true)
 program.version(packageJson.version)
 program.option('-r, --require <path>', 'override require path')
 program.option(
