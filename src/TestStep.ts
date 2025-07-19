@@ -72,15 +72,18 @@ export default abstract class TestStep implements ITestStep {
 
     const start = this.stopwatch.stopwatchNow()
 
-    function makeException(error: Error): Exception {
-      if (error.message) {
-        return {
-          type: error.name,
-          message: error.message,
-        }
+    function makeException(
+      error: Error,
+      structuredError: {
+        message: string
+        stackTrace: string
+        concatenated: string
       }
+    ): Exception {
       return {
         type: error.name,
+        message: error.message ? error.message : undefined,
+        stackTrace: structuredError.stackTrace,
       }
     }
 
@@ -112,15 +115,15 @@ export default abstract class TestStep implements ITestStep {
     } catch (error) {
       const finish = this.stopwatch.stopwatchNow()
 
-      const message = this.makeErrorMessage(error, this.sourceFrames)
+      const structuredError = this.makeErrorMessage(error, this.sourceFrames)
       const duration = millisecondsToDuration(finish - start)
       return this.emitTestStepFinished(
         testCaseStartedId,
         {
           duration,
           status: messages.TestStepResultStatus.FAILED,
-          message,
-          exception: makeException(error),
+          message: structuredError.concatenated,
+          exception: makeException(error, structuredError),
         },
         listener
       )

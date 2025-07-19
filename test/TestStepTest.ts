@@ -267,10 +267,11 @@ describe('TestStep', () => {
         testStepResult.duration,
         TimeConversion.millisecondsToDuration(0)
       )
-      assert.deepStrictEqual(testStepResult.exception, {
-        type: 'Error',
-        message: 'Should now be run',
-      })
+      assert.strictEqual(testStepResult.exception.type, 'Error')
+      assert.strictEqual(testStepResult.exception.message, 'Should now be run')
+      assert.ok(
+        testStepResult.exception.stackTrace.includes('at failed.feature:234')
+      )
     })
 
     it('returns a TestStepResult with status SKIPPED when the previous step was not passed', async () => {
@@ -287,7 +288,7 @@ describe('TestStep', () => {
       )
     })
 
-    it('returns a TestStepResult with status FAILED when the previous aftr hook step was not passed', async () => {
+    it('returns a TestStepResult with status FAILED when the previous after hook step was not passed', async () => {
       const testStepResult = await failedHookTestStep.execute(
         world,
         'some-testCaseStartedId',
@@ -299,9 +300,8 @@ describe('TestStep', () => {
         testStepResult.duration,
         TimeConversion.millisecondsToDuration(0)
       )
-      assert.deepStrictEqual(testStepResult.exception, {
-        type: 'Error',
-      })
+      assert.strictEqual(testStepResult.exception.type, 'Error')
+      assert.strictEqual(testStepResult.exception.message, undefined)
     })
   })
 })

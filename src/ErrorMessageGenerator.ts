@@ -3,7 +3,11 @@ import StackUtils from 'stack-utils'
 export type MakeErrorMessage = (
   error: Error,
   sourceFrames: readonly string[]
-) => string
+) => {
+  message: string
+  stackTrace: string
+  concatenated: string
+}
 
 export function withFullStackTrace(): MakeErrorMessage {
   const stack = new StackUtils({
@@ -24,12 +28,20 @@ export function withFullStackTrace(): MakeErrorMessage {
       .map((frame) => `    at ${frame}`)
       .join('\n')
 
-    return `${error.message}\n${trace}`
+    return {
+      message: error.message,
+      stackTrace: trace,
+      concatenated: [error.message, trace].join('\n'),
+    }
   }
 }
 
 export function withSourceFramesOnlyStackTrace(): MakeErrorMessage {
   return (error: Error, sourceFrames: string[]) => {
-    return [error.message, ...sourceFrames].join('\n')
+    return {
+      message: error.message,
+      stackTrace: sourceFrames.join('\n'),
+      concatenated: [error.message, ...sourceFrames].join('\n'),
+    }
   }
 }
