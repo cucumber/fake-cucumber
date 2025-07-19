@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Populate `Exception.stackTrace` on messages ([#147](https://github.com/cucumber/fake-cucumber/pull/147))
 
 ## [18.0.0] - 2024-11-08
 ### Added
