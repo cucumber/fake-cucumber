@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [18.1.0] - 2025-07-19
 ### Added
 - Populate `Exception.stackTrace` on messages ([#147](https://github.com/cucumber/fake-cucumber/pull/147))
 
@@ -227,7 +229,8 @@ This removes an API dependency on `@cucumber/cucumber-expressions`
 ### Added
 - First release
 
-[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v18.0.0...HEAD
+[Unreleased]: https://github.com/cucumber/fake-cucumber/compare/v18.1.0...HEAD
+[18.1.0]: https://github.com/cucumber/fake-cucumber/compare/v18.0.0...v18.1.0
 [18.0.0]: https://github.com/cucumber/fake-cucumber/compare/v17.0.0...v18.0.0
 [17.0.0]: https://github.com/cucumber/fake-cucumber/compare/v16.5.0...v17.0.0
 [16.5.0]: https://github.com/cucumber/fake-cucumber/compare/v16.4.0...v16.5.0
