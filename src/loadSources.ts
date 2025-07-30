@@ -9,8 +9,8 @@ import { PickledDocument } from './types'
 
 export async function loadSources(
   newId: IdGenerator.NewId,
-  onMessage: (envelope: Envelope) => void,
-  paths: ReadonlyArray<string>
+  paths: ReadonlyArray<string>,
+  onMessage: (envelope: Envelope) => void
 ): Promise<ReadonlyArray<PickledDocument>> {
   const gherkinQuery = new GherkinQuery()
   await gherkinFromPaths(

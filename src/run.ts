@@ -37,12 +37,8 @@ export async function run({
   messagesWriter.pipe(process.stdout)
 
   onMessage({ meta })
-
-  const supportCodeLibrary = await loadSupport(newId, requirePaths)
-
-  const pickledDocuments = await loadSources(newId, onMessage, paths)
-
-  supportCodeLibrary.toEnvelopes().forEach((envelope) => onMessage(envelope))
+  const pickledDocuments = await loadSources(newId, paths, onMessage)
+  const supportCodeLibrary = await loadSupport(newId, requirePaths, onMessage)
 
   const testRun = prepareTestRun(
     newId,

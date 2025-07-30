@@ -2,14 +2,15 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { buildSupportCode } from '@cucumber/core'
-import { IdGenerator } from '@cucumber/messages'
+import { Envelope, IdGenerator } from '@cucumber/messages'
 import { glob } from 'glob'
 
 import { state } from './state'
 
 export async function loadSupport(
   newId: IdGenerator.NewId,
-  sourcePaths: ReadonlyArray<string>
+  sourcePaths: ReadonlyArray<string>,
+  onMessage: (envelope: Envelope) => void
 ) {
   state.coreBuilder = buildSupportCode({ newId })
   const supportCodePaths = await findSupportCodePaths(sourcePaths)
@@ -26,7 +27,9 @@ export async function loadSupport(
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     require(supportCodePath)
   }
-  return state.coreBuilder.build()
+  const supportCodeLibrary = state.coreBuilder.build()
+  supportCodeLibrary.toEnvelopes().forEach((envelope) => onMessage(envelope))
+  return supportCodeLibrary
 }
 
 async function findSupportCodePaths(
