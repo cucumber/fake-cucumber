@@ -53,10 +53,12 @@ describe('Acceptance', () => {
         args.push(...extraArgs)
       }
 
-      const [actualOutput, errorOutput] = await harness.run(args)
-      console.error(errorOutput)
+      const [fromStdout, fromStdErr] = await harness.run(args)
+      // remove the first line since meta will always vary
+      const sanitisedOutput = fromStdout.split('\n').slice(1).join('\n')
 
-      await expect(actualOutput).toMatchFileSnapshot(
+      console.error(fromStdErr)
+      await expect(sanitisedOutput).toMatchFileSnapshot(
         path.join(
           process.cwd(),
           'test',
