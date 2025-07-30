@@ -11,7 +11,6 @@ yarn.lock
 .built*
 .compared
 .codegen
-acceptance/
 storybook-static
 *-go
 *.iml

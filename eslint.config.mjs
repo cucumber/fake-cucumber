@@ -67,6 +67,14 @@ export default [
 
     rules: {
       '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+  {
+    files: ['**/*.cjs'],
+
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 ]

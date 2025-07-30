@@ -1,7 +1,7 @@
-import IClock from './IClock'
+import { Clock } from './types'
 
-export default class DateClock implements IClock {
-  public clockNow(): number {
+export class DateClock implements Clock {
+  now(): number {
     return Date.now()
   }
 }

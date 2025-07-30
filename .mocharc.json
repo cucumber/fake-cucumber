@@ -1,6 +1,0 @@
-{
-  "require": ["tsx", "source-map-support/register"],
-  "extension": ["ts", "tsx"],
-  "recursive": true,
-  "timeout": 10000
-}

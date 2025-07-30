@@ -12,9 +12,9 @@
     "experimentalDecorators": true,
     "module": "CommonJS",
     "lib": [
-      "ES6",
+      "ESNext",
     ],
-    "target": "ES6",
+    "target": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
