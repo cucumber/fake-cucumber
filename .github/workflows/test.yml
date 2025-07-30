@@ -18,7 +18,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-        node-version: ["18.x", "20.x", "22.x", "23.x"]
+        node-version: ["20.x", "22.x", "24.x"]
         include:
           - os: windows-latest
             node-version: "22.x"
@@ -38,6 +38,7 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
 
-      - run: npm install-ci-test
-
+      - run: npm ci
       - run: npm run lint
+      - run: npm run build
+      - run: npm test

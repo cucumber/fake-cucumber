@@ -1,9 +1,7 @@
-import { performance } from 'perf_hooks'
+import { Stopwatch } from './types'
 
-import IStopwatch from './IStopwatch'
-
-export default class PerfHooksStopwatch implements IStopwatch {
-  public stopwatchNow(): number {
+export class PerfHooksStopwatch implements Stopwatch {
+  now(): number {
     return performance.now()
   }
 }
