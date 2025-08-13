@@ -1,3 +1,8 @@
+⚠️⚠️⚠️  
+This repository is now archived. Fake Cucumber is no longer a standalone tool, and sits within the Compatibility Kit:  
+https://github.com/cucumber/compatibility-kit/tree/main/devkit  
+⚠️⚠️⚠️
+
 # Fake Cucumber
 
 Fake Cucumber is a simple reference implementation of Cucumber.
